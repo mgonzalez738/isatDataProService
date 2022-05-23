@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsatDataProService", "IsatDataProService\IsatDataProService.csproj", "{ADD8EB05-040B-4183-B889-44634285040A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsatDataProImplementation", "IsatDataProImplementation\IsatDataProImplementation.csproj", "{52A063CA-4DD8-4FF0-9C7B-27AB1888C18A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADD8EB05-040B-4183-B889-44634285040A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADD8EB05-040B-4183-B889-44634285040A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADD8EB05-040B-4183-B889-44634285040A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADD8EB05-040B-4183-B889-44634285040A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A063CA-4DD8-4FF0-9C7B-27AB1888C18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A063CA-4DD8-4FF0-9C7B-27AB1888C18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A063CA-4DD8-4FF0-9C7B-27AB1888C18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A063CA-4DD8-4FF0-9C7B-27AB1888C18A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75FF0EDB-FA7B-40AC-9F47-D685D3033783}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,3463 @@
+{
+	"info": {
+		"_postman_id": "4b1d150d-ff7d-b150-64ea-76706926dfa3",
+		"name": "IDP_Messaging_API",
+		"description": "Provides typical remote operations for receiving and sending messages over the Inmarsat IsatData Pro\r\nsatellite IoT service.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "info",
+			"item": [
+				{
+					"name": "info_utc_time",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"tests[\"Valid time format\"] = (jsonData.length === 19 && Object.prototype.toString.call(new Date(jsonData + 'Z')) === '[object Date]');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "YXA61ApyiirlEeWUXwcTI_CBog"
+							},
+							{
+								"key": "ClientSecret",
+								"value": "YXA6mmpOCkerMdVwHxfmOqvSV03Rk-s"
+							}
+						],
+						"url": {
+							"raw": "{{TransportMethod}}{{BaseURL}}/info_utc_time.json/",
+							"host": [
+								"{{TransportMethod}}{{BaseURL}}"
+							],
+							"path": [
+								"info_utc_time.json",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "info_errors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"let allValid = true;",
+									"for (let i=0; i < jsonData.length; i++) {",
+									"    let errorDefinition = jsonData[i];",
+									"    if (errorDefinition.hasOwnProperty('ID') && typeof(errorDefinition.ID) === 'number' &&",
+									"        errorDefinition.hasOwnProperty('Name') && typeof(errorDefinition.Name) === 'string' &&",
+									"        errorDefinition.hasOwnProperty('Description') && typeof(errorDefinition.Description) === 'string') {",
+									"        continue;",
+									"    } else {",
+									"        console.log(`Invalid Error Definition: ${errorDefinition}`);",
+									"        allValid = false;",
+									"        break;",
+									"    }",
+									"}",
+									"tests[\"All Error definitions valid\"] = allValid;",
+									"console.log(`${jsonData.length} Error definitions returned by MGS`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "YXA61ApyiirlEeWUXwcTI_CBog"
+							},
+							{
+								"key": "ClientSecret",
+								"value": "YXA6mmpOCkerMdVwHxfmOqvSV03Rk-s"
+							}
+						],
+						"url": {
+							"raw": "{{TransportMethod}}{{BaseURL}}/info_errors.json/",
+							"host": [
+								"{{TransportMethod}}{{BaseURL}}"
+							],
+							"path": [
+								"info_errors.json",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "infoerrors",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "ClientId",
+										"value": "YXA61ApyiirlEeWUXwcTI_CBog",
+										"enabled": true
+									},
+									{
+										"key": "ClientSecret",
+										"value": "YXA6mmpOCkerMdVwHxfmOqvSV03Rk-s",
+										"enabled": true
+									},
+									{
+										"key": "Cache-Control",
+										"name": "Cache-Control",
+										"value": "no-cache"
+									},
+									{
+										"key": "Postman-Token",
+										"name": "Postman-Token",
+										"value": "2005d54f-8cd9-cd3e-cd81-a23bc3de3127"
+									}
+								],
+								"url": {
+									"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/info_errors.json/",
+									"protocol": "http",
+									"host": [
+										"isatdatapro",
+										"skywave",
+										"com"
+									],
+									"path": [
+										"GLGW",
+										"GWServices_v1",
+										"RestMessages.svc",
+										"info_errors.json",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "javascript",
+							"header": [
+								{
+									"key": "Accept-Ranges",
+									"value": "none",
+									"name": "Accept-Ranges",
+									"description": "Content-Types that are acceptable"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"name": "Access-Control-Allow-Origin",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip",
+									"name": "Content-Encoding",
+									"description": "The type of encoding used on the data."
+								},
+								{
+									"key": "Content-Length",
+									"value": "9206",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 18 Mar 2016 08:44:29 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Server",
+									"value": "Microsoft-IIS/7.5",
+									"name": "Server",
+									"description": "A name for the server"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding",
+									"name": "Vary",
+									"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+								}
+							],
+							"cookie": [],
+							"body": "[{\"ID\":259,\"Name\":\"ERR_INVALID_VAR_ID\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":260,\"Name\":\"ERR_INVALID_MESSAGE_TYPE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":261,\"Name\":\"ERR_INVALID_DATA_LENGTH_OR_CHECKSUM\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":262,\"Name\":\"ERR_INVALID_PASSWORD\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":512,\"Name\":\"ERR_INVALID_TERMINAL_ID_GENERAL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":513,\"Name\":\"ERR_INVALID_TERMINAL_ID_NO_SUCH_TERMINAL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":0,\"Name\":\"NO_ERRORS\",\"Description\":\"\"},{\"ID\":1,\"Name\":\"ERR_BUFFER_TOO_SHORT\",\"Description\":\"Received PPC message is shorter than expected.\"},{\"ID\":2,\"Name\":\"ERR_INVALID_MESSAGE\",\"Description\":\"You have tried to send a restricted message.\"},{\"ID\":3,\"Name\":\"ERR_INVALID_MESSAGE_CONTENT\",\"Description\":\"Message content is not valid.\"},{\"ID\":4,\"Name\":\"ERR_MT_SN_MISSING\",\"Description\":\"MT serial number is missing.\"},{\"ID\":5,\"Name\":\"ERR_FW_MESSAGE_MISSING\",\"Description\":\"MessageContent field of your message is empty, or the whole message is missing.\"},{\"ID\":7,\"Name\":\"ERR_UNKNOWN_FW_MESSAGE_TYPE\",\"Description\":\"Received an unknown message type from a PPC.\"},{\"ID\":9,\"Name\":\"ERR_MQ_NOT_AVAILABLE\",\"Description\":\"Internal error - message queue is not available.\"},{\"ID\":11,\"Name\":\"ERR_MQ_UNABLE_TO_SEND\",\"Description\":\"Internal error - unable to send the message to a message queue.\"},{\"ID\":12,\"Name\":\"ERR_ADMIN_MQ_UNABLE_TO_SEND\",\"Description\":\"Internal error - unable to send the message to a message queue.\"},{\"ID\":13,\"Name\":\"ERR_UNABLE_TO_OBTAIN_MESSAGE_ID\",\"Description\":\"Internal error - unable to obtain unique message ID.\"},{\"ID\":14,\"Name\":\"ERR_INVALID_MESSAGE_ID\",\"Description\":\"Unable to find a message with the specified ID.\"},{\"ID\":15,\"Name\":\"ERR_UNKNOWN_ERROR_CODE\",\"Description\":\"Internal error - invalid error code value.\"},{\"ID\":16,\"Name\":\"ERR_CUSTOMER_DELAYED\",\"Description\":\"Web service request rejected. Please check your profile for the right delay value.\"},{\"ID\":17,\"Name\":\"ERR_INVALID_INPUT_PARAMETER_TIMESTAMP_FORMAT\",\"Description\":\"Invalid timestamp format.\"},{\"ID\":19,\"Name\":\"ERR_DB_ERROR\",\"Description\":\"Internal error - database access failed.\"},{\"ID\":20,\"Name\":\"ERR_GATEWAY_NOT_READY\",\"Description\":\"Gateway not ready, please try again later.\"},{\"ID\":23,\"Name\":\"ERR_INVALID_INPUT_DATA\",\"Description\":\"One of message or web service operation parameters is empty or invalid.\"},{\"ID\":24,\"Name\":\"ERR_INVALID_ROLE\",\"Description\":\"Invalid security role.\"},{\"ID\":25,\"Name\":\"ERR_INVALID_ROLE_ID\",\"Description\":\"Invalid security role ID.\"},{\"ID\":26,\"Name\":\"ERR_INVALID_CUSTOMER\",\"Description\":\"Invalid customer or customer related data.\"},{\"ID\":27,\"Name\":\"ERR_RECORD_ALREADY_EXISTS\",\"Description\":\"A database record already exists.\"},{\"ID\":28,\"Name\":\"ERR_RECORD_DOES_NOT_EXIST\",\"Description\":\"Requested record does not exist in the database.\"},{\"ID\":30,\"Name\":\"ERR_CUSTOMER_DOES_NOT_EXIST\",\"Description\":\"The specified customer does not exist in the database.\"},{\"ID\":31,\"Name\":\"ERR_TERMINAL_DOES_NOT_EXIST\",\"Description\":\"The specified terminal does not exist in the database.\"},{\"ID\":35,\"Name\":\"ERR_INVALID_SUBSCRIPTION_INFO\",\"Description\":\"Invalid or no push subscription settings sent.\"},{\"ID\":40,\"Name\":\"ERR_INVALID_CUSTOMER_GW_VAR_ID\",\"Description\":\"Invalid VAR destination ID specified.\"},{\"ID\":41,\"Name\":\"ERR_GW_VAR_ID_NOT_ASSIGNED\",\"Description\":\"Specified VAR destination ID exists, but not assigned to the customer.\"},{\"ID\":42,\"Name\":\"ERR_FW_UNACKED_PACKET_NOT_FOUND\",\"Description\":\"GW server error - unacked PPC packet not found.\"},{\"ID\":43,\"Name\":\"ERR_FW_UNABLE_TO_SEND_MESSAGE\",\"Description\":\"Gateway unable to send a forward message.\"},{\"ID\":44,\"Name\":\"ERR_WS_FAILED_TO_REINITIALIZE_PROPERLY\",\"Description\":\"WS failed to reinitialize.\"},{\"ID\":45,\"Name\":\"ERR_WS_CANNOT_DELETE_YOUR_ACCOUNT\",\"Description\":\"Current user cannot delete its own account.\"},{\"ID\":46,\"Name\":\"ERR_CANNOT_DELETE_VAR_BECAUSE_ASSIGNED_TO_CUSTOMER\",\"Description\":\"VAR destination cannot be deleted because it is assigned to one or more customers.\"},{\"ID\":47,\"Name\":\"ERR_MAX_NUMBER_OF_VARS_REACHED\",\"Description\":\"Maximum number of VAR destinations reached.\"},{\"ID\":48,\"Name\":\"ERR_INVALID_DESTINATION_ID\",\"Description\":\"Invalid or nonexistent VAR destination ID.\"},{\"ID\":49,\"Name\":\"ERR_MESSAGE_CLOSED_BECAUSE_OF_TERMINAL_RESET\",\"Description\":\"Message closed because a terminal registration message was received.\"},{\"ID\":50,\"Name\":\"ERR_INVALID_MT_SN_LENGTH\",\"Description\":\"Invalid MT serial number.\"},{\"ID\":51,\"Name\":\"ERR_LOW_VALUE_LARGER_THAN_HIGH\",\"Description\":\"Low value is larger than high value.\"},{\"ID\":52,\"Name\":\"ERR_INVALID_IO_PORT_NUMBER\",\"Description\":\"Invalid IO port number.\"},{\"ID\":53,\"Name\":\"ERR_INVALID_INITIAL_COUNTER_VALUE\",\"Description\":\"Invalid counter value.\"},{\"ID\":54,\"Name\":\"ERR_INVALID_PSR_START_TIME\",\"Description\":\"Invalid PSR start time.\"},{\"ID\":55,\"Name\":\"ERR_INVALID_WINDOW_DURATION\",\"Description\":\"Invalid window duration.\"},{\"ID\":56,\"Name\":\"ERR_INVALID_MULTIFENCE_POINT_ID\",\"Description\":\"Invalid multifence point ID.\"},{\"ID\":57,\"Name\":\"ERR_PPC_MESSAGE_TOO_LONG\",\"Description\":\"PPC message is too long.\"},{\"ID\":58,\"Name\":\"ERR_INVALID_POLL_DATA\",\"Description\":\"Invalid poll data.\"},{\"ID\":59,\"Name\":\"ERR_INVALID_COMMAND_NUMBER\",\"Description\":\"Invalid command number.\"},{\"ID\":60,\"Name\":\"ERR_INVALID_DATALENGTH_VALUE\",\"Description\":\"Invalid datalength value.\"},{\"ID\":61,\"Name\":\"ERR_INVALID_SCAN_INTERVAL\",\"Description\":\"Invalid scan interval.\"},{\"ID\":62,\"Name\":\"ERR_INVALID_FOLLOW_UP_SCANS\",\"Description\":\"Invalid follow up scans value.\"},{\"ID\":63,\"Name\":\"ERR_INVALID_FOLLOW_UP_SCAN_INTERVAL\",\"Description\":\"Invalid follow up scan interval value.\"},{\"ID\":64,\"Name\":\"ERR_INVALID_REPORT_INTERVAL\",\"Description\":\"Invalid report interval.\"},{\"ID\":65,\"Name\":\"ERR_INVALID_MESSAGE_SCAN_INTERVAL\",\"Description\":\"Invalid message scan interval.\"},{\"ID\":66,\"Name\":\"ERR_INVALID_TIME_SEED_MONTH\",\"Description\":\"Invalid time seed month value.\"},{\"ID\":67,\"Name\":\"ERR_INVALID_TIME_SEED_DAY\",\"Description\":\"Invalid time seed day value.\"},{\"ID\":68,\"Name\":\"ERR_INVALID_TIME_SEED_HOUR\",\"Description\":\"Invalid time seed hour value.\"},{\"ID\":69,\"Name\":\"ERR_INVALID_TIME_SEED_MINUTE\",\"Description\":\"Invalid time seed minute value.\"},{\"ID\":70,\"Name\":\"ERR_KDU_MESSAGE_TOO_LONG\",\"Description\":\"KDU message is too long.\"},{\"ID\":71,\"Name\":\"ERR_FIELDS_VALUE_IS_ZERO\",\"Description\":\"Number of fields is set to zero.\"},{\"ID\":72,\"Name\":\"ERR_INVALID_FIELDS_LENGTH\",\"Description\":\"Invalid fields length.\"},{\"ID\":73,\"Name\":\"ERR_ONE_OF_THE_KDU_FIELDS_IS_ZERO\",\"Description\":\"One of the KDU fields is empty or invalid.\"},{\"ID\":74,\"Name\":\"ERR_ONE_OF_KDU_FIELDS_TOO_LONG\",\"Description\":\"One of the KDU fields is too long.\"},{\"ID\":75,\"Name\":\"ERR_VAMPS_PARAMETER_ID_TOO_BIG\",\"Description\":\"VAMPS parameter ID vaule is too big.\"},{\"ID\":76,\"Name\":\"ERR_VAMPS_INVALID_PARAMETERS_VALUE\",\"Description\":\"Invalid VAMPS parameter value.\"},{\"ID\":77,\"Name\":\"ERR_INVALID_TEMPERATURE\",\"Description\":\"Invalid temperature value.\"},{\"ID\":78,\"Name\":\"ERR_INVALID_GPS_TRIGGER2\",\"Description\":\"Invalid GPS trigger2 value.\"},{\"ID\":79,\"Name\":\"ERR_SHORT_MESSAGE_DATA_TOO_LONG\",\"Description\":\"Short message data is too long.\"},{\"ID\":80,\"Name\":\"ERR_INVALID_LATITUDE\",\"Description\":\"Invalid latitude.\"},{\"ID\":81,\"Name\":\"ERR_INVALID_LONGITUDE\",\"Description\":\"Invalid longitude.\"},{\"ID\":82,\"Name\":\"ERR_INVALID_MULTIFENCE_ENABLE_MASK\",\"Description\":\"Invalid multifence enable mask.\"},{\"ID\":83,\"Name\":\"ERR_INVALID_MULTIFENCE_RESET_MASK\",\"Description\":\"Invalid multifence reset mask.\"},{\"ID\":84,\"Name\":\"ERR_INVALID_DETECTION_THRESHOLD\",\"Description\":\"Invalid detection threshold.\"},{\"ID\":85,\"Name\":\"ERR_FOLLOW_UP_SCAN_WITH_FS_INTERVAL_EXCEEDS_NORMAL_SCAN_INTERVAL\",\"Description\":\"FollowUpScans * FollowUpScanInterval >= ScanInterval\"},{\"ID\":86,\"Name\":\"ERR_INVALID_RADIUS\",\"Description\":\"Invalid radius.\"},{\"ID\":87,\"Name\":\"ERR_INVALID_DWELL_VALUE\",\"Description\":\"Invalid dwell value.\"},{\"ID\":88,\"Name\":\"ERR_INVALID_HOUR_VALUE\",\"Description\":\"Invalid hour value.\"},{\"ID\":89,\"Name\":\"ERR_INVALID_MINUTE_VALUE\",\"Description\":\"Invalid minute value.\"},{\"ID\":90,\"Name\":\"ERR_TOO_MANY_MESSAGES_REQUESTED\",\"Description\":\"Too many forward messages requested.\"},{\"ID\":91,\"Name\":\"ERR_NOT_A_VAMPS_TERMINAL\",\"Description\":\"User attempted to send a VAMPS message to a non-VAMPS terminal.\"},{\"ID\":92,\"Name\":\"ERR_NOT_A_CARGO_SENSOR_TERMINAL\",\"Description\":\"User attempted to send a CargoSensor message to a non-CargoSensor terminal.\"},{\"ID\":93,\"Name\":\"ERR_DB_CONSTRAINT_ERROR\",\"Description\":\"Unable to complete database request due to DB constraint error.\"},{\"ID\":94,\"Name\":\"ERR_CANNOT_DELETE_VAR_BECAUSE_ASSIGNED_TO_MT\",\"Description\":\"There is a terminal associated to this VAR ID.\"},{\"ID\":95,\"Name\":\"ERR_TOO_MANY_MESSAGES_QUEUED_FOR_SAME_TERMINAL\",\"Description\":\"Too many messages queued for the same terminal.\"},{\"ID\":96,\"Name\":\"ERR_INVALID_RPMTHRESHOLD_VALUE\",\"Description\":\"RPM Threshold value too big.\"},{\"ID\":97,\"Name\":\"ERR_MAX_MESSAGE_SIZE_EXCEEDED\",\"Description\":\"Maximum message size exceeded.\"},{\"ID\":98,\"Name\":\"ERR_MAX_TERMINAL_COUNT_PER_CALL_EXCEEDED\",\"Description\":\"Maximum destination terminal count in this call exceeded.\"},{\"ID\":128,\"Name\":\"ERR_INTERNAL_EXCEPTION\",\"Description\":\"Internal Gateway exception.\"},{\"ID\":256,\"Name\":\"ERR_INVALID_MESSAGE_FORMAT\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":257,\"Name\":\"ERR_INVALID_VERSION\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":258,\"Name\":\"ERR_INVALID_PPC_ID\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":514,\"Name\":\"ERR_INVALID_TERMINAL_ID_NOT_YOUR_TERMINAL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":515,\"Name\":\"ERR_TERMINAL_BEING_USED_BY_PPC\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":516,\"Name\":\"ERR_TERMINAL_NOT_REGISTERED\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":517,\"Name\":\"ERR_TERMINAL_DISABLED_BY_PPC\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":518,\"Name\":\"ERR_WAKEUP_PERIOD_CHANGE_IN_PROGRESS\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":520,\"Name\":\"ERR_NOT_AUTHORIZED_TO_USE_THIS_MESSAGE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":521,\"Name\":\"ERR_TERMINAL_MUTED_BY_VAR\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":522,\"Name\":\"ERR_TERMINAL_REGULATORY_MUTED_BY_OPERATOR\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":523,\"Name\":\"ERR_CHANGING_PRIORITY_IN_PROGRESS\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":524,\"Name\":\"ERR_TERMINAL_NOT_ACTIVE_BECAUSE_BILLING_LEVEL_IS_ZERO\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":525,\"Name\":\"ERR_INVALID_WAKEUP_PERIOD\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":529,\"Name\":\"ERR_INVALID_MESSAGE_SENT_TO_MT1000\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":531,\"Name\":\"ERR_WAKEUP_INTERVAL_ALREADY_SET_TO_THAT_LEVEL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":765,\"Name\":\"ERR_TERMINAL_BEAM_NUMBER_UNKNOWN\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":766,\"Name\":\"ERR_WAKEUP_INTERVAL_NOT_SET\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":767,\"Name\":\"ERR_NO_EARTHSTATION_ROUTE_TO_TERMINAL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1024,\"Name\":\"ERR_INVALID_MESSAGE_CONTENT_GENERAL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1025,\"Name\":\"ERR_UNKNOWN_WAKEUP_PERIOD\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1026,\"Name\":\"ERR_UNKNOWN_PRESCHEDULED_PERIOD\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1027,\"Name\":\"ERR_UNKNOWN_POLL_REPORT_TYPE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1028,\"Name\":\"ERR_SHORT_MESSAGE_IS_TOO_LONG\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1029,\"Name\":\"ERR_INVALID_PRIORITY\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1030,\"Name\":\"ERR_NOT_AUTHORIZED_TO_USE_THIS_PRIORITY\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1031,\"Name\":\"ERR_INVALID_BEAM_NUMBER\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1040,\"Name\":\"ERR_UNKNOWN_CHARACTERISTICS\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1041,\"Name\":\"ERR_INVALID_PORT_SETTING\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1042,\"Name\":\"ERR_INVALID_ANALOG_SETTING\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1043,\"Name\":\"ERR_INVALID_GPS_SETTING\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1044,\"Name\":\"ERR_INVALID_TERMINAL_BILLING_LEVEL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1045,\"Name\":\"ERR_TERMINAL_ALREADY_IN_THIS_BILLING_LEVEL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1046,\"Name\":\"ERR_INVALID_GEOFENCE_LATITUDE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1047,\"Name\":\"ERR_INVALID_GEOFENCE_LONGITUDE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1048,\"Name\":\"ERR_INVALID_GEOFENCE_RADIUS\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1049,\"Name\":\"ERR_INVALID_SHM_INITIAL_COUNT\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1050,\"Name\":\"ERR_INVALID_ACTIVE_PSR_START_TIME_OR_DURATION\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1051,\"Name\":\"ERR_GENERIC_TERMINAL_CONTROL_MESSAGE_IS_TOO_LONG\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1052,\"Name\":\"ERR_SET_TERMINAL_APP_CHARACTERISTICS_MESSAGE_IS_TOO_LONG\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1053,\"Name\":\"ERR_CANNOT_ENABLE_BOTH_SINGLE_AND_MULTIPLE_GEOFENCE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1280,\"Name\":\"ERR_PPC_PROCESSING_ERROR\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1281,\"Name\":\"ERR_INITIALIZATION_TIMEOUT\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1282,\"Name\":\"ERR_INVALID_INITIALIZATION_MESSAGE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1283,\"Name\":\"ERR_DUPLICATE_LOGIN_MESSAGE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1284,\"Name\":\"ERR_INVALID_USER_ID_OR_PASSWORD\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1285,\"Name\":\"ERR_DECOMMISSIONED_VAR\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1286,\"Name\":\"ERR_MESSAGE_REJECTED\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1287,\"Name\":\"ERR_NO_VAR_CONNECTION_TO_CLOSE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1288,\"Name\":\"ERR_DGS_FEATURE_NOT_ENABLED\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1296,\"Name\":\"ERR_TOO_MANY_INVALID_MESSAGES\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1298,\"Name\":\"ERR_RMA_BILLING_UNDEFINED\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1299,\"Name\":\"ERR_BILLING_LEVEL_NOT_AVAILABLE_TO_VAR\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1300,\"Name\":\"ERR_BILLING_LEVEL_CAN_ONLY_BE_USED_ONCE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1301,\"Name\":\"ERR_CANNOT_CHANGE_BILLING_LEVEL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1302,\"Name\":\"ERR_BILLING_CONFIGURATION_INCOMPLETE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1303,\"Name\":\"ERR_RMA_TERMINAL_NOT_ACTIVE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1304,\"Name\":\"ERR_RMA_REPLACEMENT_TERMINAL_IS_ACTIVE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1305,\"Name\":\"ERR_RMA_AND_REPLACEMENT_TERMINALS_NOT_OWNED_BY_SAME_VAR\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1306,\"Name\":\"ERR_FAILED_TO_CHANGECDR_STREAM\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":1308,\"Name\":\"ERR_MESSAGE_TRAFFIC_OVERLOAD_PROTECTION\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5888,\"Name\":\"ERR_UNKNOWN_FL_PACKET\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5889,\"Name\":\"ERR_STATUS_REQUEST_RESERVED_TYPE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5890,\"Name\":\"ERR_PULSE_PORT_WAS_NOT_ENABLED\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5891,\"Name\":\"ERR_INVALID_POLL_TYPE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5892,\"Name\":\"ERR_DIGITAL_PULSE_QUEUE_OVERFLOW\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5893,\"Name\":\"ERR_SHORT_TEXT_MESSAGE_OVERFLOW\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5894,\"Name\":\"ERR_INVALID_SET_CHARACTERISTICS_MESSAGE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5895,\"Name\":\"ERR_INVALID_MEMORY_TYPE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5896,\"Name\":\"ERR_UNUSED1\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5897,\"Name\":\"ERR_ADDING_TERMINAL_TO_MORE_THAN_5_GROUPS\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5898,\"Name\":\"ERR_INVALID_ADDRESS_RANGE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5899,\"Name\":\"ERR_GROUP_OR_TERMINAL_WAKEUP_CONFLICT\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5900,\"Name\":\"ERR_UNUSED2\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5901,\"Name\":\"ERR_SHM_PORT_NOT_CONFIGURED_TO_DISABLED_OR_INVALID_PORT\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5902,\"Name\":\"ERR_SHM_ENABLED_WHEN_SETTING_SHM_CHARACTERISTICS\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5903,\"Name\":\"ERR_PORT_IN_USE_FOR_SHM\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5904,\"Name\":\"ERR_INVALID_SET_APP_CHARACTERISTICS_MESSAGE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5905,\"Name\":\"ERR_APP_CHARACTERISTICS_POLL_RESERVED_TYPE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5906,\"Name\":\"ERR_INVALID_ACTIVE_PSR_START_TIME_OR_INTERVAL\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5907,\"Name\":\"ERR_INVALID_GENERIC_TERMINAL_CONTROL_MESSAGE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5908,\"Name\":\"ERR_CANNOT_ENABLE_SINGLE_GEOFENCE_WHEN_MULTIFENCE_ENABLED\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5909,\"Name\":\"ERR_CANNOT_ENABLE_MULTIFENCE_WHEN_SINGLE_GEOFENCE_ENABLED\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5910,\"Name\":\"ERR_CANNOT_SET_NEW_CENTERPOINT\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5911,\"Name\":\"ERR_OVERLAP_BETWEEN_MULTIPLE_GEOFENCE_ZONES\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":100,\"Name\":\"ERR_MAX_MESSAGE_COUNT_EXCEEDED\",\"Description\":\"Maximum number of sent messages exceeded.\"},{\"ID\":5912,\"Name\":\"ERR_GEOFENCE_CENTERPOINT_ACQUISITION_IN_PROGRESS\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5913,\"Name\":\"ERR_BREADCRUMB_DUMP_IN_PROGRESS\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5914,\"Name\":\"ERR_BREADCRUMB_QUEUE_IS_EMPTY_OR_BREADCRUMB_DISABLED\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5915,\"Name\":\"ERR_RESERVED_APPLICATION_REPORT_TYPE\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":5916,\"Name\":\"ERR_CANNOT_ENABLE_MULTIFENCE_USING_DEFAULT_90_180_VALUES\",\"Description\":\"Error code returned by a PPC or a terminal.\"},{\"ID\":99,\"Name\":\"ERR_PPC_CONNECTION_IS_DOWN\",\"Description\":\"Unable to deliver the message because the PPC connection is down.\"},{\"ID\":101,\"Name\":\"ERR_PUSH_SERVICE_NOT_ACTIVE\",\"Description\":\"Customer push deliver is not active.\"},{\"ID\":102,\"Name\":\"ERR_PUSH_SERVICE_NOT_PAUSED\",\"Description\":\"Customer push delivery is not paused.\"},{\"ID\":103,\"Name\":\"ERR_INVALID_CUSTOM_PSR_INTERVAL\",\"Description\":\"Invalid custom PSR interval.  It shall be 0 or between 10 and 1440 inclusive.\"},{\"ID\":104,\"Name\":\"ERR_UNAUTHORIZED_FOR_THIS_OPERATION\",\"Description\":\"The user is not authorized for this gateway operation.\"},{\"ID\":105,\"Name\":\"ERR_WAYPOINT_ID_LENGTH_EXCEEDED\",\"Description\":\"Waypoint ID length exceeded. Length of the waypoint ID should be less than 4 characters.\"},{\"ID\":530,\"Name\":\"ERR_MT_USED_BY_PROVISIONING\",\"Description\":\"Terminal is used by provisioning.\"},{\"ID\":1054,\"Name\":\"ERR_INVALID_STATE_OF_GEOFENCE_DIO_EVT\",\"Description\":\"Invalid state of geofence controlled DIO events.\"},{\"ID\":1792,\"Name\":\"ERR_INVALID_CHANNEL_ID\",\"Description\":\"Invalid home channel ID or current channel ID.\"},{\"ID\":1793,\"Name\":\"ERR_NOT_MT_HOME_PPC\",\"Description\":\"Not a home PPC of the terminal.\"},{\"ID\":1794,\"Name\":\"ERR_NOT_MT_CURRENT_PPC\",\"Description\":\"Not a current PPC of the terminal.\"},{\"ID\":1795,\"Name\":\"ERR_MSG_FROM_UN_HOME_PPC\",\"Description\":\"Message is from an un-home PPC.\"},{\"ID\":1796,\"Name\":\"ERR_CHANNEL_NOT_DEFINED\",\"Description\":\"Channel ID is not defined.\"},{\"ID\":533,\"Name\":\"ERR_INVALID_MESSAGE_SENT_NO_MOTION_SENSOR\",\"Description\":\"Invalid message sent to terminal which does not have motion sensor.\"},{\"ID\":1056,\"Name\":\"ERR_INVALID_REPORT_CONFIG_STARTSTOP\",\"Description\":\"Invalid event report configuration in the Start\\/Stop Report Based on Motion.\"},{\"ID\":1057,\"Name\":\"ERR_INVALID_STARTSTOP_FILTER_VALUE\",\"Description\":\"Invalid motion start\\/stop filter value.  It shall be between 0 and 120 inclusive.\"},{\"ID\":1058,\"Name\":\"ERR_INVALID_PSR_WHEN_ASSET_NOT_MOVING\",\"Description\":\"Invalid PSR interval when asset is not moving.  It shall be 0 or between 10 and 1440 inclusive.\"},{\"ID\":12288,\"Name\":\"ERR_HE_INVALID_PORT_NUMBER\",\"Description\":\"Invalid value of the Port Number field\"},{\"ID\":12289,\"Name\":\"ERR_HE_INVALID_REPORT_INTERVAL\",\"Description\":\"Invalid value of the Report Interval field\"},{\"ID\":12290,\"Name\":\"ERR_HE_INVALID_REPORT_START_TIME\",\"Description\":\"Invalid value of the Report Start Time field\"},{\"ID\":12291,\"Name\":\"ERR_HE_INVALID_SHM_WINDOW_DURATION\",\"Description\":\"Invalid value of the SHM Window Duration field\"},{\"ID\":12292,\"Name\":\"ERR_HE_INVALID_REPORT_TYPE\",\"Description\":\"Invalid value of the Report Type field\"},{\"ID\":12293,\"Name\":\"ERR_HE_INVALID_COUNT_INIT_VALUE\",\"Description\":\"Invalid value of the Count Init field\"},{\"ID\":12294,\"Name\":\"ERR_HE_INVALID_PORT_EVENT_CONFIG\",\"Description\":\"Invalid event configuration parameter: PortEvent0, 1 or 2\"},{\"ID\":12295,\"Name\":\"ERR_HE_INVALID_PORT_FILTER\",\"Description\":\"Invalid value of the Port Filter field\"},{\"ID\":12296,\"Name\":\"ERR_HE_INVALID_WINDOW_START_HR\",\"Description\":\"Invalid value of the Window Start Hour field\"},{\"ID\":12297,\"Name\":\"ERR_HE_INVALID_EVENT_CONFIGURATION\",\"Description\":\"Invalid value of the Event Configuration field\"},{\"ID\":12298,\"Name\":\"ERR_HE_INVALID_WINDOW_DURATION\",\"Description\":\"Invalid value of the Window Duration field\"},{\"ID\":12299,\"Name\":\"ERR_HE_INVALID_AUX_EVENT_CONFIG\",\"Description\":\"Invalid event configuration parameter: AuxPort\"},{\"ID\":12300,\"Name\":\"ERR_HE_INVALID_AUX_THRESHOLD\",\"Description\":\"Invalid value of the Threshold field\"},{\"ID\":12301,\"Name\":\"ERR_HE_INVALID_GF_FILTER\",\"Description\":\"Invalid value of the Filter field\"},{\"ID\":12302,\"Name\":\"ERR_HE_INVALID_GF_SHMCONTENT\",\"Description\":\"Invalid value of the SHMContent field\"},{\"ID\":12303,\"Name\":\"ERR_HE_INVALID_GF_REPORT_TYPE\",\"Description\":\"Invalid value of the ReportType field\"},{\"ID\":12304,\"Name\":\"ERR_HE_INVALID_GF_RADIUS\",\"Description\":\"Invalid value of the RadiusInMeters field\"},{\"ID\":12305,\"Name\":\"ERR_HE_INVALID_GF_NUMBER_OF_POINTS\",\"Description\":\"Invalid value of the NumberOfPoints field\"},{\"ID\":12306,\"Name\":\"ERR_HE_INVALID_GF_ID\",\"Description\":\"Invalid value of the GeifenceID field\"},{\"ID\":17152,\"Name\":\"ERR_INVALID_RESEND_COUNT\",\"Description\":\"Invalid num of times to send a message\"},{\"ID\":17153,\"Name\":\"ERR_INVALID_REPEAT_INTERVAL\",\"Description\":\"Invalid interval of repeating a message\"},{\"ID\":17670,\"Name\":\"ERR_VAR_TRAFFIC_OFF_BY_OP\",\"Description\":\"VAR forward traffic turned off by operator\"},{\"ID\":17674,\"Name\":\"ERR_VAR_LOGIN_IN_PROGRESS\",\"Description\":\"VAR login in progress\"},{\"ID\":17675,\"Name\":\"ERR_FIRST_VAR_MESSAGE_NOT_LOGIN\",\"Description\":\"The first message received from VAR is not the VAR login message\"},{\"ID\":17676,\"Name\":\"ERR_VAR_DISCONNECTED_BY_OP\",\"Description\":\"The VAR connection is disconnected by operator\"},{\"ID\":17677,\"Name\":\"ERR_TOO_MANY_BAD_MESSAGES_RECEIVED\",\"Description\":\"Too many bad messages received from VAR\"},{\"ID\":17678,\"Name\":\"ERR_MESSAGE_TOO_LONG\",\"Description\":\"The message from VAR is too long\"},{\"ID\":17681,\"Name\":\"ERR_MAX_QUEUED_MESSAGES_FOR_MOBILE_REACHED\",\"Description\":\"The maximum number of queued messages for a specified mobile was reached\"},{\"ID\":17682,\"Name\":\"ERR_MAX_ACTIVE_MSGS_REACHED\",\"Description\":\"The maximum number of active messages reached\"},{\"ID\":17683,\"Name\":\"ERR_CANCEL_MSG_DOES_NOT_EXIST\",\"Description\":\"To cancel a message, but the message does not exist\"},{\"ID\":17684,\"Name\":\"ERR_MAX_OUTSTANDING_MSG_LEN_OF_VC_REACHED\",\"Description\":\"The maximum outstanding message length of virtual carrier reached\"},{\"ID\":12308,\"Name\":\"ERR_NDN_INVALID_BEAM\",\"Description\":\"Non delivery notification reason: invalid beam number\"},{\"ID\":12309,\"Name\":\"ERR_NDN_TIMED_OUT\",\"Description\":\"Non delivery notification reason: message time out\"},{\"ID\":106,\"Name\":\"ERR_INVALID_OPERATOR\",\"Description\":\"Invalid operator or operator related data.\"},{\"ID\":107,\"Name\":\"ERR_WS_CANNOT_DELETE_YOUR_OPERATOR\",\"Description\":\"Operator delete denied.\"},{\"ID\":108,\"Name\":\"ERR_INVALID_CUSTOMER_FOR_OPERATOR\",\"Description\":\"Customer update access denied because the user is under different operator.\"},{\"ID\":109,\"Name\":\"ERR_INVALID_TERMINAL_FOR_OPERATOR\",\"Description\":\"Terminal update access denied because the user is under different operator.\"},{\"ID\":110,\"Name\":\"ERR_INVALID_TERMINAL_CUSTOMER_COMBINATION\",\"Description\":\"Customer\\/Terminal update access denied because they are under different operator.\"},{\"ID\":12307,\"Name\":\"ERR_UNSUPPORTED_MESSAGE\",\"Description\":\"Message type not supported by the destination.\"},{\"ID\":21785,\"Name\":\"ERR_AUTHENTICATION_ERROR\",\"Description\":\"Gateway service authentication error.\"},{\"ID\":21786,\"Name\":\"ERR_INVALID_WS_PARAMETER\",\"Description\":\"One of web service operation parameters has invalid value.\"},{\"ID\":21787,\"Name\":\"ERR_NDN_FAILED_CURRENT_BEAM_UPDATE\",\"Description\":\"Non delivery notification reason: failed to update the current beam number.\"},{\"ID\":21788,\"Name\":\"ERR_NDN_TOO_MANY_MESSAGES\",\"Description\":\"Non delivery notification reason: too many messages\"},{\"ID\":21789,\"Name\":\"ERR_NDN_INITIAL_SYSTEM_STATE\",\"Description\":\"Non delivery notification reason: initial system state\"},{\"ID\":21790,\"Name\":\"ERR_NDN_UNKNOWN_ERROR\",\"Description\":\"Non delivery notification reason: unknow\"},{\"ID\":21791,\"Name\":\"ERR_NDN_INVALID_PRIORITY\",\"Description\":\"Non delivery notification reason: invalid priority\"},{\"ID\":113,\"Name\":\"ERR_WEB_SERVICE_OPERATION_DEPRECATED\",\"Description\":\"This web service operation is not available any more.\"},{\"ID\":114,\"Name\":\"ERR_DND_UNABLE_TO_SCHEDULE\",\"Description\":\"Gateway was not able to calculate delivery time for this low power terminal message.\"},{\"ID\":115,\"Name\":\"ERR_UNABLE_TO_CANCEL_THE_MESSAGE\",\"Description\":\"The message you wish to cancel cannot be cancelled any more.\"},{\"ID\":116,\"Name\":\"ERR_INVALID_MESSAGE_XML_CONTENT\",\"Description\":\"Gateway is unable to parse the message content.\"},{\"ID\":12310,\"Name\":\"ERR_INVALID_BROADCAST_ID_NO_SUCH_ID\",\"Description\":\"Invalid broadcast ID, no such ID in the system.\"},{\"ID\":12311,\"Name\":\"ERR_TERMINAL_IS_DISABLED\",\"Description\":\"Mobile terminal is disabled.\"},{\"ID\":12312,\"Name\":\"ERR_BROADCAST_ID_IS_DISABLED\",\"Description\":\"Broadcast ID is disabled.\"},{\"ID\":12313,\"Name\":\"ERR_MT_ERROR_UNABLE_TO_ALLOCATE_MESSAGE_BUFFER\",\"Description\":\"Mobile generated error: unable to allocate message buffer.\"},{\"ID\":12314,\"Name\":\"ERR_MT_ERROR_UNKNOWN_MESSAGE_TYPE\",\"Description\":\"Mobile generated error: unknown message type\"},{\"ID\":21792,\"Name\":\"ERR_NDN_TERMINAL_WAS_RESET\",\"Description\":\"Non delivery notification reason: terminal was reset\"},{\"ID\":18,\"Name\":\"ERR_SERVER_STOPPED\",\"Description\":\"Gateway cannot accept messages for this destination because one of its servers was stopped\"},{\"ID\":17154,\"Name\":\"ERR_INVALID_VAIN\",\"Description\":\"Invalid VAIN\"},{\"ID\":16896,\"Name\":\"ERR_INVALID_DESTINATION_ID_GENERAL\",\"Description\":\"Invalid terminal ID - general\"},{\"ID\":16897,\"Name\":\"ERR_INVALID_DESTINATION_ID_NO_SUCH_DESTINATION\",\"Description\":\"Invalid terminal ID - no such terminal\"},{\"ID\":16898,\"Name\":\"ERR_INVALID_DESTINATION_ID_NOT_YOUR_DESTINATION\",\"Description\":\"Invalid terminal ID - not your terminal\"},{\"ID\":16900,\"Name\":\"ERR_DESTINATION_NOT_REGISTERED\",\"Description\":\"Terminal not registered\"},{\"ID\":16904,\"Name\":\"ERR_NOT_AUTHORIZED_TO_USE_THE_MESSAGE\",\"Description\":\"Not authorized to use the message\"},{\"ID\":17149,\"Name\":\"ERR_TERMINAL_BEAM_UNKNOWN\",\"Description\":\"Terminal beam unnown\"},{\"ID\":17151,\"Name\":\"ERR_NO_EARTHSTATION_ROUTE_TO_DESTINATION\",\"Description\":\"No earth station route to terminal\"},{\"ID\":17408,\"Name\":\"ERR_MESSAGE_CONTENT_IS_INVALID\",\"Description\":\"Invalid message content - general\"},{\"ID\":17413,\"Name\":\"ERR_PRIORITY_INVALID\",\"Description\":\"Invalid message priority\"},{\"ID\":17414,\"Name\":\"ERR_NOT_AUTHORIZED_TO_USE_THE_PRIORITY\",\"Description\":\"Not authorized to use this message priority\"},{\"ID\":17415,\"Name\":\"ERR_INVALID_BEAM\",\"Description\":\"Invalid beam number\"},{\"ID\":17664,\"Name\":\"ERR_PROCESSING_ERROR\",\"Description\":\"General processing error\"},{\"ID\":17667,\"Name\":\"ERR_DUPLICATE_LOGIN\",\"Description\":\"Duplicate login\"},{\"ID\":17668,\"Name\":\"ERR_INVALID_USER_OR_PASSWORD\",\"Description\":\"Invalid user name or password\"},{\"ID\":21793,\"Name\":\"ERR_INVALID_BROADCAST_ID_NOT_YOUR_ID\",\"Description\":\"Invalid broadcast ID or the ID belongs to some other Gateway account\"},{\"ID\":21794,\"Name\":\"ERR_RESTRICTED_MESSAGE\",\"Description\":\"Sending of messages with this SIN and MIN pair is restricted.\"},{\"ID\":21795,\"Name\":\"ERR_REGULAR_MESSAGE_SIZE_QUEUE_FULL\",\"Description\":\"Maximum number of queued regular sized messages for this terminal has been reached.\"},{\"ID\":21796,\"Name\":\"ERR_LARGE_MESSAGE_SIZE_QUEUE_FULL\",\"Description\":\"Maximum number of queued large messages for this terminal has been reached.\"},{\"ID\":21797,\"Name\":\"ERR_LOW_POWER_MODE_MESSAGE_TOO_LONG\",\"Description\":\"Low power mode terminal message is too long.\"},{\"ID\":17685,\"Name\":\"ERR_MESSAGE_CANNOT_BE_CANCELLED_BECAUSE_ALREADY_SENT\",\"Description\":\"Message cannot be cancelled because it has already been sent to its destination.\"},{\"ID\":21798,\"Name\":\"ERR_DUPLICATE_STREAM_DESTINATION\",\"Description\":\"\"},{\"ID\":21799,\"Name\":\"ERR_NO_MORE_AVAILABLE_STREAM_HANDLES\",\"Description\":\"\"},{\"ID\":21800,\"Name\":\"ERR_MAX_STREAM_COUNT_EXCEEDED\",\"Description\":\"\"},{\"ID\":21801,\"Name\":\"ERR_STREAM_ALREADY_CLOSED\",\"Description\":\"Stream has already been closed\"},{\"ID\":21802,\"Name\":\"ERR_NOT_YOUR_STREAM\",\"Description\":\"The stream does not belong to your account\"},{\"ID\":21803,\"Name\":\"ERR_STREAM_CLOSED\",\"Description\":\"Stream has already been closed\"},{\"ID\":21804,\"Name\":\"ERR_STREAM_NOT_FOUND\",\"Description\":\"Stream not found\"},{\"ID\":21805,\"Name\":\"ERR_UNABLE_TO_CANCEL_STREAMED_MESSAGE\",\"Description\":\"Messages belonging to a stream cannot be cancelled\"},{\"ID\":21806,\"Name\":\"ERR_INVALID_STREAM_HANDLE\",\"Description\":\"Invalid stream handle\"},{\"ID\":21807,\"Name\":\"ERR_STREAM_CLOSED_NACK\",\"Description\":\"Stream closed because a message NACK was received\"},{\"ID\":21808,\"Name\":\"ERR_STREAM_EXPIRED\",\"Description\":\"Stream closed because it has expired\"},{\"ID\":21809,\"Name\":\"ERR_NDN_MAX_RETRY_EXHAUSTED\",\"Description\":\"Maximum retry or overflow of first packet of low-power message exhausted\"},{\"ID\":21810,\"Name\":\"ERR_NDN_INVALID_MODEM_WI\",\"Description\":\"Invalid modem wake-up interval\"},{\"ID\":17686,\"Name\":\"ERR_MESSAGE_ACK_ERROR_CONNECTION_LOSS\",\"Description\":\"Message not ACK-ed due to hub connection loss\"},{\"ID\":21811,\"Name\":\"ERR_NDN_FAILED_TO_LOAD\",\"Description\":\"Failed to load the message from database\"},{\"ID\":21812,\"Name\":\"ERR_NDN_TIMEOUT_NO_CHANCE_TO_TRANSMIT\",\"Description\":\"Message timeout - never had chance to be transmitted\"},{\"ID\":21813,\"Name\":\"ERR_NDN_TIMEOUT_SOME_ATTEMPTS_TO_TRANSMIT\",\"Description\":\"Message timeout - some attempts made but never received modem ACK, and later no chance to be transmitted\"},{\"ID\":21814,\"Name\":\"ERR_NDN_TIMEOUT_SOME_ATTEMPTS_TO_TRANSMIT_ACKED\",\"Description\":\"Message timeout - some successful attempts made (modem ACK received), but later no chance to be transmitted\"},{\"ID\":21815,\"Name\":\"ERR_NDN_TERMINAL_RESET_NO_CHANCE_TO_TRANSMIT\",\"Description\":\"Terminal was reset - never had chance to be transmitted\"},{\"ID\":21816,\"Name\":\"ERR_NDN_TERMINAL_RESET_SOME_ATTEMPTS_TO_TRANSMIT\",\"Description\":\"Terminal was reset - some attempts made but never received modem ACK\"},{\"ID\":21817,\"Name\":\"ERR_UNCHANGED_HWM_DETECTED\",\"Description\":\"Too many same high-water mark GET requests detected\"},{\"ID\":21818,\"Name\":\"ERR_MTBP_SESSION_CLEARED\",\"Description\":\"MTBP session cleared while waiting for an ACK\"},{\"ID\":21819,\"Name\":\"ERR_INVALID_GATEWAY_ID\",\"Description\":\"Message destination is not provisioned for this gateway.\"},{\"ID\":21820,\"Name\":\"ERR_TERMINAL_NETWORK_PROVISIONING_PROBLEM\",\"Description\":\"Terminal not provisioned for any network type.\"}]"
+						}
+					]
+				},
+				{
+					"name": "info_version",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"const versionParts = jsonData.split('.');",
+									"tests['All Version elements present'] = versionParts.length === 4;",
+									"/*",
+									"const major = Number(versionParts[0]);",
+									"const minor = Number(versionParts[1]);",
+									"const patch = Number(versionParts[2]);",
+									"const build = Number(versionParts[3]);",
+									"console.log(major, minor, patch, build);",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "YXA61ApyiirlEeWUXwcTI_CBog"
+							},
+							{
+								"key": "ClientSecret",
+								"value": "YXA6mmpOCkerMdVwHxfmOqvSV03Rk-s"
+							}
+						],
+						"url": {
+							"raw": "{{TransportMethod}}{{BaseURL}}/info_version.json/",
+							"host": [
+								"{{TransportMethod}}{{BaseURL}}"
+							],
+							"path": [
+								"info_version.json",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Basic informational operations such as time, version and error codes.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "mobile-originated (return) messages",
+			"item": [
+				{
+					"name": "get_return_messages (time HWM)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const startTime = new Date(pm.environment.get(\"returnTimeHwm\") + 'Z');\r",
+									"diffTime = Math.abs(new Date() - startTime);\r",
+									"const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));\r",
+									"if (diffDays > 5) {\r",
+									"    console.log(\"Adjusting aged returnTimeHwm to 24 hours ago.\");\r",
+									"    const newStartTime = (new Date((new Date()).getTime() - (24 * 60 * 60 * 1000))).toISOString().substring(0, 19).replace('T', ' ');\r",
+									"    pm.environment.set(\"returnTimeHwm\", newStartTime);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "YXA61ApyiirlEeWUXwcTI_CBog"
+							},
+							{
+								"key": "ClientSecret",
+								"value": "YXA6mmpOCkerMdVwHxfmOqvSV03Rk-s"
+							}
+						],
+						"url": {
+							"raw": "{{TransportMethod}}{{BaseURL}}/get_return_messages.json/?access_id={{access_id}}&password={{password}}&start_utc={{returnTimeHwm}}&include_raw_payload=true&include_type=true",
+							"host": [
+								"{{TransportMethod}}{{BaseURL}}"
+							],
+							"path": [
+								"get_return_messages.json",
+								""
+							],
+							"query": [
+								{
+									"key": "access_id",
+									"value": "{{access_id}}"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}"
+								},
+								{
+									"key": "start_utc",
+									"value": "{{returnTimeHwm}}"
+								},
+								{
+									"key": "include_raw_payload",
+									"value": "true"
+								},
+								{
+									"key": "include_type",
+									"value": "true"
+								},
+								{
+									"key": "mobile_id",
+									"value": "{{mobile_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_return_messages (msgID HWM)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"// Error Handling",
+									"if (jsonData.ErrorID !== 0) {",
+									"    switch (jsonData.ErrorID) {",
+									"        case 14:",
+									"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid Message ID\"] = jsonData.ErrorID !== 14;",
+									"            break;",
+									"        case 16:",
+									"            tests[\"ERROR \"+jsonData.ErrorID+\" - Too many requests\"] = jsonData.ErrorID !== 16;",
+									"            break;",
+									"        case 17:",
+									"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid timestamp/watermark\"] = jsonData.ErrorID !== 17;",
+									"            break;",
+									"        case 23:",
+									"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid web service parameter\"] = jsonData.ErrorID !== 23;",
+									"            break;",
+									"        case 513:",
+									"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid Mobile ID\"] = jsonData.ErrorID !== 513;",
+									"            break;",
+									"        case 514:",
+									"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid Mobile Ownership\"] = jsonData.ErrorID !== 514;",
+									"            break;",
+									"        case 21785:",
+									"            tests[\"ERROR \"+jsonData.ErrorID+\" - Authentication Failed\"] = jsonData.ErrorID !== 21785;",
+									"            break;",
+									"        case 21786:",
+									"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid web service parameter\"] = jsonData.ErrorID !== 21786;",
+									"            break;",
+									"        default:",
+									"            tests[\"ERROR \"+jsonData.ErrorID] = jsonData.ErrorID === 0;",
+									"    }",
+									"} else {",
+									"    tests[\"No error\"] = jsonData.ErrorID === 0;",
+									"}",
+									"",
+									"tests[\"Old high watermark (msgId): \"+postman.getEnvironmentVariable(\"returnMsgIdHwm\")] = jsonData.ErrorID !== 17;",
+									"",
+									"tests[\"No more messages to retrieve\"] = jsonData.More === false;",
+									"",
+									"// Set new high watermark",
+									"var NextStartUTC = jsonData.NextStartUTC;",
+									"var NextStartID = jsonData.NextStartID;",
+									"if (NextStartID !== -1) { ",
+									"    tests[\"New High Watermark (msgId) \"+NextStartID] = responseBody.has(\"NextStartID\");",
+									"    postman.setEnvironmentVariable(\"returnMsgIdHwm\",NextStartID);",
+									"}",
+									"",
+									"// Validation summary",
+									"if (jsonData.Messages) {",
+									"   tests[jsonData.Messages.length+\" Messages Received\"] = responseBody.has(\"Messages\");",
+									"   var mobiles = [{}];",
+									"   //var mobiles[0] = {};",
+									"   mobiles[0].mobileID = jsonData.Messages[0].MobileID;",
+									"   mobiles[0].msgCount = 0;",
+									"   mobiles[0].decoded = 0;",
+									"   for (var i = 0; i < jsonData.Messages.length; i++) {",
+									"        //DEBUG: tests[\"processing msg ID: \"+jsonData.Messages[i].ID] = responseBody.has(\"Payload\");",
+									"        var mobileFound = false;",
+									"        for (var m = 0; m < mobiles.length; m++) {",
+									"            if (mobiles[m].mobileID === jsonData.Messages[i].MobileID) {",
+									"                mobileFound = true;",
+									"                mobiles[m].msgCount++;",
+									"                if (jsonData.Messages[i].Payload && jsonData.Messages[i].Payload.Fields) {",
+									"                    mobiles[m].decoded++;",
+									"                    //DEBUG: tests[\"msgID:\"+jsonData.Messages[i].ID+\" has decoded Fields\"] = responseBody.has(\"Fields\");",
+									"                }",
+									"            }",
+									"        }",
+									"        if (mobileFound === false) {",
+									"            var newLen = mobiles.length + 1;",
+									"            mobiles[newLen] = {};",
+									"            mobiles[newLen].mobileID = jsonData.Messages[i].MobileID",
+									"            mobiles[newLen].msgCount = 1",
+									"        }",
+									"   }",
+									"   for (var i = 0; i < mobiles.length; i++) {",
+									"       tests[mobiles[i].mobileID+\" sent \"+mobiles[i].msgCount+\" messages; \"+mobiles[i].decoded+\" decoded\"] = mobiles[i].mobileID !== null;",
+									"   }",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "YXA61ApyiirlEeWUXwcTI_CBog"
+							},
+							{
+								"key": "ClientSecret",
+								"value": "YXA6mmpOCkerMdVwHxfmOqvSV03Rk-s"
+							}
+						],
+						"url": {
+							"raw": "{{TransportMethod}}{{BaseURL}}/get_return_messages.json/?access_id={{access_id}}&password={{password}}&from_id={{returnMsgIdHwm}}&include_raw_payload=true&include_type=true",
+							"host": [
+								"{{TransportMethod}}{{BaseURL}}"
+							],
+							"path": [
+								"get_return_messages.json",
+								""
+							],
+							"query": [
+								{
+									"key": "access_id",
+									"value": "{{access_id}}"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}"
+								},
+								{
+									"key": "from_id",
+									"value": "{{returnMsgIdHwm}}"
+								},
+								{
+									"key": "include_raw_payload",
+									"value": "true"
+								},
+								{
+									"key": "include_type",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"const jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"No more messages to retrieve\"] = jsonData.More === false;",
+							"",
+							"// Set new high watermark",
+							"if (jsonData.NextStartUTC !== '') { ",
+							"    tests[`New High Watermark (time): ${jsonData.NextStartUTC}`] = true;",
+							"    pm.environment.set('returnTimeHwm', jsonData.NextStartUTC);",
+							"    console.log(`get_return_messages time high watermark updated`);",
+							"}",
+							"console.log(`get_return_messages time high watermark: ${pm.environment.get('returnTimeHwm')}`);",
+							"if (jsonData.NextStartID !== -1) {",
+							"    tests[`New High Watermark (msgId): ${jsonData.NextStartID}`] = true;",
+							"    pm.environment.set('returnMsgIdHwm', jsonData.NextStartID);",
+							"    console.log(`get_return_messages message ID high watermark updated`);",
+							"}",
+							"console.log(`get_return_messages message ID high watermark: ${pm.environment.get('returnMsgIdHwm')}`);",
+							"",
+							"// Validation summary",
+							"const mobiles = [];",
+							"if (jsonData.Messages) {",
+							"    tests[jsonData.Messages.length + \" Messages Received\"] = true;",
+							"    let allMessagesValid = true;",
+							"    for (let i = 0; i < jsonData.Messages.length; i++) {",
+							"        const message = jsonData.Messages[i];",
+							"        if (!message.hasOwnProperty('MobileID')) {",
+							"            allMessagesValid = false;",
+							"            break;",
+							"        }",
+							"        if (!mobiles.includes(message.MobileID)) {",
+							"            mobiles.push(message.MobileID);",
+							"        }",
+							"        if (message.hasOwnProperty('Payload')) {",
+							"            console.log(`TODO: JSON payload validation (messageId ${message.ID})`);",
+							"        }",
+							"    }",
+							"    tests[\"All Messages valid\"] = allMessagesValid;",
+							"    console.log(`Received ${jsonData.Messages.length} messages from ${mobiles.length} mobiles`);",
+							"    if (jsonData.More === true) {",
+							"        tests[\"More messages to retrieve\"] = true;",
+							"    }",
+							"} else {",
+							"    tests[\"No messages to retrieve\"] = true;",
+							"}"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "mobile-terminated (forward) messages",
+			"item": [
+				{
+					"name": "submit (send)",
+					"item": [
+						{
+							"name": "broadcast",
+							"item": [
+								{
+									"name": "submit_messages_to_destinations (SUBSCRIBE to Broadcast ID)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// WIP: Try to find a way to increment UserMessageID to accommodate multiple submissions",
+													"//var jsonData = JSON.parse(RequestBody);",
+													"//postman.setEnvironmentVariable(\"jsonRequest\",jsonData);",
+													"",
+													"// Get next message ID",
+													"var oldMsgId = parseInt(postman.getEnvironmentVariable(\"UserMessageID\"));",
+													"postman.setEnvironmentVariable(\"UserMessageID\",oldMsgId+1);",
+													"",
+													"// Calculate and store the submission time",
+													"var date = new Date();",
+													"var year = date.getUTCFullYear();",
+													"var month = date.getUTCMonth()+1;",
+													"if (month < 10) { month = \"0\".concat(month) }",
+													"var day = date.getUTCDate()+1;",
+													"if (day < 10) { day = \"0\".concat(day) }",
+													"var hour = date.getUTCHours();",
+													"if (hour < 10) { hour = \"0\".concat(hour) }",
+													"var minute = date.getUTCMinutes();",
+													"if (minute < 10) { minute = \"0\".concat(minute) }",
+													"var second = date.getUTCSeconds();",
+													"if (second < 10) { second = \"0\".concat(second) }",
+													"var timestamp = \"\".concat(year,\"-\",month,\"-\",day,\" \",hour,\":\",minute,\":\",second);",
+													"postman.setEnvironmentVariable(\"forwardSubmitTime\", timestamp);"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);",
+													"",
+													"// Error handling",
+													"if (jsonData.SubmitForwardMessages_JResult) { ",
+													"    jsonData = jsonData.SubmitForwardMessages_JResult",
+													"} else {",
+													"    tests[\"ERROR - invalid response\"] = responseBody.has(\"ErrorID\")",
+													"}",
+													"",
+													"if (jsonData.ErrorID !== 0) {",
+													"    switch (jsonData.ErrorID) {",
+													"        case 16:",
+													"            tests[\"ERROR \"+jsonData.ErrorID+\" - Too many requests\"] = jsonData.ErrorID !== 16;",
+													"            break;",
+													"        case 3:",
+													"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid message content\"] = jsonData.ErrorID !== 3;",
+													"            break;",
+													"        case 4:",
+													"            tests[\"ERROR \"+jsonData.ErrorID+\" - Missing Mobile ID\"] = jsonData.ErrorID !== 4;",
+													"            break;",
+													"        case 21785:",
+													"            tests[\"ERROR \"+jsonData.ErrorID+\" - Authentication Failed\"] = jsonData.ErrorID !== 21785;",
+													"            break;",
+													"        case 23:",
+													"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid Input Data\"] = jsonData.ErrorID !== 23;",
+													"            break;",
+													"        case 116:",
+													"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid Codec Format\"] = jsonData.ErrorID !== 116;",
+													"            break;",
+													"        case 513:",
+													"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid Mobile ID\"] = jsonData.ErrorID !== 513;",
+													"            break;",
+													"        case 514:",
+													"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid Ownership\"] = jsonData.ErrorID !== 514;",
+													"            break;",
+													"        default:",
+													"            tests[\"ERROR \"+jsonData.ErrorID] = jsonData.ErrorID === 0;",
+													"    }",
+													"} else {",
+													"    tests[\"No error\"] = jsonData.ErrorID === 0;",
+													"}",
+													"",
+													"var msgCount = jsonData.Submissions.length;",
+													"for (var i = 0; i < jsonData.Submissions.length; i++) {",
+													"    tests[\"User message: \"+jsonData.Submissions[i].UserMessageID+\" = Forward message ID: \"+jsonData.Submissions[i].ForwardMessageID] = jsonData.Submissions[i].ErrorID === 0;",
+													"}",
+													"postman.setEnvironmentVariable(\"lastFwdMsgId\",jsonData.Submissions[msgCount -1].ForwardMessageID);",
+													"tests[\"Messages submitted: \"+msgCount] = jsonData.ErrorID === 0;",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"accessID\": \"{{access_id}}\", \r\n    \"password\": \"{{password}}\",\r\n    \"destinations\": \"{{mobile_id}},{{mobile_id_2}}\",\r\n    \"message\": {\r\n        \"DestinationID\": \"\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"Payload\": {\r\n            \"SIN\": 0,\r\n            \"MIN\": 36,\r\n            \"Fields\": [\r\n                {\r\n                    \"Name\": \"broadcastIDs\",\r\n                    \"Elements\": [\r\n                    {\r\n                        \"Index\": 0,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"{{broadcast_id_sub}}\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 1,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 2,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 3,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 4,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 5,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 6,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 7,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 8,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 9,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 10,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 11,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 12,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 13,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 14,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Index\": 15,\r\n                        \"Fields\": [\r\n                        {\r\n                            \"Name\": \"id\",\r\n                            \"Value\": \"0\"\r\n                        }\r\n                        ]\r\n                    }\r\n                ]\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}\r\n"
+										},
+										"url": {
+											"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages_to_destinations.json/",
+											"host": [
+												"{{TransportMethod}}{{BaseURL}}"
+											],
+											"path": [
+												"submit_messages_to_destinations.json",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "post msg response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"enabled": true,
+														"description": "The mime type of this content"
+													},
+													{
+														"key": "Cache-Control",
+														"name": "Cache-Control",
+														"value": "no-cache"
+													},
+													{
+														"key": "Postman-Token",
+														"name": "Postman-Token",
+														"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+												},
+												"url": {
+													"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+													"protocol": "http",
+													"host": [
+														"isatdatapro",
+														"skywave",
+														"com"
+													],
+													"path": [
+														"GLGW",
+														"GWServices_v1",
+														"RestMessages.svc",
+														"submit_messages.json",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "javascript",
+											"header": [
+												{
+													"key": "Accept-Ranges",
+													"value": "none",
+													"name": "Accept-Ranges",
+													"description": ""
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*",
+													"name": "Access-Control-Allow-Origin",
+													"description": ""
+												},
+												{
+													"key": "Connection",
+													"value": "Keep-Alive",
+													"name": "Connection",
+													"description": ""
+												},
+												{
+													"key": "Content-Encoding",
+													"value": "gzip",
+													"name": "Content-Encoding",
+													"description": ""
+												},
+												{
+													"key": "Content-Length",
+													"value": "322",
+													"name": "Content-Length",
+													"description": ""
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8",
+													"name": "Content-Type",
+													"description": ""
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+													"name": "Date",
+													"description": ""
+												},
+												{
+													"key": "Server",
+													"value": "Microsoft-IIS/7.5",
+													"name": "Server",
+													"description": ""
+												},
+												{
+													"key": "Vary",
+													"value": "Accept-Encoding",
+													"name": "Vary",
+													"description": ""
+												}
+											],
+											"cookie": [],
+											"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+										}
+									]
+								},
+								{
+									"name": "GET Broadcast IDs",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+													"const submission = jsonData.Submissions[0];",
+													"tests[`GET BROADCAST SUBSCRIPTIONS message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"RawPayload\": [0,115]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+											"host": [
+												"{{TransportMethod}}{{BaseURL}}"
+											],
+											"path": [
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "post msg response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"enabled": true,
+														"description": "The mime type of this content"
+													},
+													{
+														"key": "Cache-Control",
+														"name": "Cache-Control",
+														"value": "no-cache"
+													},
+													{
+														"key": "Postman-Token",
+														"name": "Postman-Token",
+														"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+												},
+												"url": {
+													"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+													"protocol": "http",
+													"host": [
+														"isatdatapro",
+														"skywave",
+														"com"
+													],
+													"path": [
+														"GLGW",
+														"GWServices_v1",
+														"RestMessages.svc",
+														"submit_messages.json",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "javascript",
+											"header": [
+												{
+													"key": "Accept-Ranges",
+													"value": "none",
+													"name": "Accept-Ranges",
+													"description": "Content-Types that are acceptable"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*",
+													"name": "Access-Control-Allow-Origin",
+													"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+												},
+												{
+													"key": "Connection",
+													"value": "Keep-Alive",
+													"name": "Connection",
+													"description": "Options that are desired for the connection"
+												},
+												{
+													"key": "Content-Encoding",
+													"value": "gzip",
+													"name": "Content-Encoding",
+													"description": "The type of encoding used on the data."
+												},
+												{
+													"key": "Content-Length",
+													"value": "322",
+													"name": "Content-Length",
+													"description": "The length of the response body in octets (8-bit bytes)"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8",
+													"name": "Content-Type",
+													"description": "The mime type of this content"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+													"name": "Date",
+													"description": "The date and time that the message was sent"
+												},
+												{
+													"key": "Server",
+													"value": "Microsoft-IIS/7.5",
+													"name": "Server",
+													"description": "A name for the server"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept-Encoding",
+													"name": "Vary",
+													"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+												}
+											],
+											"cookie": [],
+											"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+										}
+									]
+								},
+								{
+									"name": "PING broacast group",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{broadcast_id}}\", \r\n        \"UserMessageID\": \"{{UserMessageID}}\",\r\n        \"Priority\": -1,\r\n        \"Payload\":\r\n        {\r\n            \"SIN\": 0,\r\n            \"MIN\": 112,\r\n            \"Fields\": [\r\n            ]\r\n        }\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+											"host": [
+												"{{TransportMethod}}{{BaseURL}}"
+											],
+											"path": [
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "post msg response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"enabled": true,
+														"description": "The mime type of this content"
+													},
+													{
+														"key": "Cache-Control",
+														"name": "Cache-Control",
+														"value": "no-cache"
+													},
+													{
+														"key": "Postman-Token",
+														"name": "Postman-Token",
+														"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+												},
+												"url": {
+													"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+													"protocol": "http",
+													"host": [
+														"isatdatapro",
+														"skywave",
+														"com"
+													],
+													"path": [
+														"GLGW",
+														"GWServices_v1",
+														"RestMessages.svc",
+														"submit_messages.json",
+														""
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "javascript",
+											"header": [
+												{
+													"key": "Accept-Ranges",
+													"value": "none",
+													"name": "Accept-Ranges",
+													"description": "Content-Types that are acceptable"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*",
+													"name": "Access-Control-Allow-Origin",
+													"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+												},
+												{
+													"key": "Connection",
+													"value": "Keep-Alive",
+													"name": "Connection",
+													"description": "Options that are desired for the connection"
+												},
+												{
+													"key": "Content-Encoding",
+													"value": "gzip",
+													"name": "Content-Encoding",
+													"description": "The type of encoding used on the data."
+												},
+												{
+													"key": "Content-Length",
+													"value": "322",
+													"name": "Content-Length",
+													"description": "The length of the response body in octets (8-bit bytes)"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8",
+													"name": "Content-Type",
+													"description": "The mime type of this content"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+													"name": "Date",
+													"description": "The date and time that the message was sent"
+												},
+												{
+													"key": "Server",
+													"value": "Microsoft-IIS/7.5",
+													"name": "Server",
+													"description": "A name for the server"
+												},
+												{
+													"key": "Vary",
+													"value": "Accept-Encoding",
+													"name": "Vary",
+													"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+												}
+											],
+											"cookie": [],
+											"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+										}
+									]
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "submit_messages (single)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let requestBody = {",
+											"    \"accessID\": pm.environment.get('access_id'), ",
+											"    \"password\": pm.environment.get('password'), ",
+											"    \"messages\": [",
+											"        {",
+											"            \"DestinationID\": pm.environment.get('mobile_id'), ",
+											"            \"UserMessageID\": pm.environment.get('UserMessageID'), ",
+											"        }",
+											"    ]",
+											"}",
+											"if (pm.environment.get('testFwdMsgRawPayload').includes('[')) {",
+											"    requestBody[\"messages\"][0][\"RawPayload\"] = JSON.parse(pm.environment.get('testFwdMsgRawPayload'));",
+											"} else if (pm.environment.get('testFwdMsgJsonPayload') !== '') {",
+											"    requestBody[\"messages\"][0][\"Payload\"] = JSON.parse(pm.environment.get('testFwdMsgJsonPayload'));",
+											"}",
+											"pm.environment.set('testFwdMsgRequestBody', JSON.stringify(requestBody));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"",
+											"for (var i = 0; i < jsonData.Submissions.length; i++) {",
+											"    const submission = jsonData.Submissions[i];",
+											"    tests[`User message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = true;",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{testFwdMsgRequestBody}}"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": "Content-Types that are acceptable"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": "The type of encoding used on the data."
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "PING modem",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const d = new Date();\r",
+											"const seconds = d.getUTCHours() * 3600 + d.getUTCMinutes() * 60 + d.getUTCSeconds();\r",
+											"const pingTime = seconds % 65535;\r",
+											"pm.environment.set('pingTime', pingTime);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`PING message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": \"{{UserMessageID}}\",\r\n        \"Priority\": 3,\r\n        \"Payload\":\r\n        {\r\n            \"SIN\": 0,\r\n            \"MIN\": 112,\r\n            \"Fields\": [\r\n                {\r\n                    \"Name\": \"requestTime\",\r\n                    \"Value\": \"{{pingTime}}\"\r\n                }\r\n            ]\r\n        }\r\n    }\r\n]\r\n}"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": "Content-Types that are acceptable"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": "The type of encoding used on the data."
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "GET CONFIG (modem)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`GET CONFIG message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"RawPayload\": [0,97]\r\n    }\r\n]\r\n}\r\n\r\n"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": ""
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": ""
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": ""
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": ""
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": ""
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": ""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": ""
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": ""
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": ""
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "SET ALWAYS AWAKE",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`SET AWAKE message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}},\r\n        \"Payload\":\r\n        {\r\n            \"Name\": \"setSleepSchedule\",\r\n            \"SIN\": 0,\r\n            \"MIN\": 70,\r\n            \"IsForward\": \"True\",\r\n            \"Fields\": [\r\n            {\r\n                \"Name\": \"wakeupInterval\",\r\n                \"Value\": \"None\"\r\n            }\r\n            ]\r\n        }\r\n    }\r\n]\r\n}"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": "Content-Types that are acceptable"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": "The type of encoding used on the data."
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "GET LOCATION (modem)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`GET LOCATION message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"RawPayload\": [0,72]\r\n    }\r\n]\r\n}\r\n\r\n"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": ""
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": ""
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": ""
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": ""
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": ""
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": ""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": ""
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": ""
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": ""
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "RESET modem (flush)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`RESET MODEM message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"Payload\":\r\n        {\r\n            \"SIN\": 0,\r\n            \"MIN\": 68,\r\n            \"IsForward\": true,\r\n            \"Fields\": [\r\n            {\r\n                \"Name\": \"resetType\",\r\n                \"Value\": \"ModemFlush\"\r\n            }\r\n            ]\r\n        }\r\n    }\r\n]\r\n}"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								},
+								"description": "Restart modem "
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": "Content-Types that are acceptable"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": "The type of encoding used on the data."
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "RESET external assert",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`RESET MODEM message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"Payload\":\r\n        {\r\n            \"SIN\": 0,\r\n            \"MIN\": 68,\r\n            \"IsForward\": true,\r\n            \"Fields\": [\r\n            {\r\n                \"Name\": \"resetType\",\r\n                \"Value\": \"Terminal\"\r\n            }\r\n            ]\r\n        }\r\n    }\r\n]\r\n}"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								},
+								"description": "Restart modem "
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": "Content-Types that are acceptable"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": "The type of encoding used on the data."
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "GET RECEIVE METRICS (last hour)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`GET RX METRICS message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"Payload\":\r\n        {\r\n            \"Name\": \"getRxMetrics\",\r\n            \"SIN\": 0,\r\n            \"MIN\": 99,\r\n            \"IsForward\": \"True\",\r\n            \"Fields\": [\r\n            {\r\n                \"Name\": \"period\",\r\n                \"Value\": \"LastFullHour\"\r\n            }\r\n            ]\r\n        }\r\n    }\r\n]\r\n}\r\n\r\n"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": "Content-Types that are acceptable"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": "Options that are desired for the connection"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": "The type of encoding used on the data."
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": "The length of the response body in octets (8-bit bytes)"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": "The mime type of this content"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": "A name for the server"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "GET TRANSMIT METRICS (last hour)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`GET TX METRICS message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"Payload\":\r\n        {\r\n            \"Name\": \"getTxMetrics\",\r\n            \"SIN\": 0,\r\n            \"MIN\": 100,\r\n            \"IsForward\": \"True\",\r\n            \"Fields\": [\r\n            {\r\n                \"Name\": \"period\",\r\n                \"Value\": \"LastFullHour\"\r\n            }\r\n            ]\r\n        }\r\n    }\r\n]\r\n}\r\n\r\n"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": ""
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": ""
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": ""
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": ""
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": ""
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": ""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": ""
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": ""
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": ""
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "MUTE modem",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`MUTE MODEM message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"RawPayload\": [0,71,1]\r\n    }\r\n]\r\n}\r\n\r\n"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": ""
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": ""
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": ""
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": ""
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": ""
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": ""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": ""
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": ""
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": ""
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						},
+						{
+							"name": "UNMUTE modem",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = (JSON.parse(responseBody)).SubmitForwardMessages_JResult;",
+											"const submission = jsonData.Submissions[0];",
+											"tests[`UNMUTE MODEM message ${submission.UserMessageID} submitted as ForwardMessageID ${submission.ForwardMessageID}`] = submission.ErrorID === 0;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"accessID\": \"{{access_id}}\", \r\n\"password\": \"{{password}}\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"{{mobile_id}}\", \r\n        \"UserMessageID\": {{UserMessageID}}, \r\n        \"RawPayload\": [0,71,0]\r\n    }\r\n]\r\n}\r\n\r\n"
+								},
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_messages.json/",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_messages.json",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "post msg response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"enabled": true,
+												"description": "The mime type of this content"
+											},
+											{
+												"key": "Cache-Control",
+												"name": "Cache-Control",
+												"value": "no-cache"
+											},
+											{
+												"key": "Postman-Token",
+												"name": "Postman-Token",
+												"value": "88da9dc7-96e1-fd23-04cf-a76fa34260de"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"accessID\": \"70000594\", \r\n\"password\": \"PMdemo1\", \r\n\"messages\": [\r\n    {\r\n        \"DestinationID\": \"01082083SKY88AC\", \r\n        \"UserMessageID\": 111, \r\n        \"RawPayload\": [16,1]\r\n    }\r\n]\r\n}"
+										},
+										"url": {
+											"raw": "http://isatdatapro.skywave.com/GLGW/GWServices_v1/RestMessages.svc/submit_messages.json/",
+											"protocol": "http",
+											"host": [
+												"isatdatapro",
+												"skywave",
+												"com"
+											],
+											"path": [
+												"GLGW",
+												"GWServices_v1",
+												"RestMessages.svc",
+												"submit_messages.json",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "javascript",
+									"header": [
+										{
+											"key": "Accept-Ranges",
+											"value": "none",
+											"name": "Accept-Ranges",
+											"description": ""
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*",
+											"name": "Access-Control-Allow-Origin",
+											"description": ""
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive",
+											"name": "Connection",
+											"description": ""
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip",
+											"name": "Content-Encoding",
+											"description": ""
+										},
+										{
+											"key": "Content-Length",
+											"value": "322",
+											"name": "Content-Length",
+											"description": ""
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8",
+											"name": "Content-Type",
+											"description": ""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Mar 2016 11:31:05 GMT",
+											"name": "Date",
+											"description": ""
+										},
+										{
+											"key": "Server",
+											"value": "Microsoft-IIS/7.5",
+											"name": "Server",
+											"description": ""
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding",
+											"name": "Vary",
+											"description": ""
+										}
+									],
+									"cookie": [],
+									"body": "{\"SubmitForwardMessages_JResult\":{\"ErrorID\":0,\"Submissions\":[{\"ForwardMessageID\":124617392,\"DestinationID\":\"01082083SKY88AC\",\"StateUTC\":\"2016-03-17 11:31:05\",\"ErrorID\":0,\"UserMessageID\":111,\"ScheduledSendUTC\":\"2016-03-17 11:33:25\",\"TerminalWakeupPeriod\":300,\"OTAMessageSize\":2}]}}"
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Increment the next message ID to use",
+									"const oldMsgId = parseInt(pm.environment.get(\"UserMessageID\"));",
+									"pm.environment.set(\"UserMessageID\", oldMsgId + 1);",
+									"",
+									"// Calculate and store the submission time",
+									"const forwardSubmitTime = (new Date()).toISOString().substring(0, 19).replace('T', ' ');",
+									"pm.environment.set(\"forwardSubmitTime\", forwardSubmitTime);"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"if (!jsonData.SubmitForwardMessages_JResult) {",
+									"    tests['Unexpected response'] = false;",
+									"} else {",
+									"    jsonData = jsonData.SubmitForwardMessages_JResult;",
+									"    //console.log(`Processing response ${JSON.stringify(jsonData)}`);",
+									"    if (jsonData.ErrorID !== 0) {",
+									"        tests[`Submission failed`] = false;",
+									"    } else {",
+									"        let fwIDs = '';",
+									"        for (let i=0; i < jsonData.Submissions.length; i++) {",
+									"            const submission = jsonData.Submissions[i];",
+									"            if (fwIDs.length > 0) {",
+									"                fwIDs += ','",
+									"            }",
+									"            fwIDs += `${submission.ForwardMessageID}`;",
+									"        }",
+									"        pm.environment.set('fwIDs', fwIDs);",
+									"        console.log(`New ForwardMessageIDs: ${pm.environment.get('fwIDs')}`);",
+									"    }",
+									"}"
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "get status (confirm delivery)",
+					"item": [
+						{
+							"name": "get_forward_statuses (lastSubmit)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = JSON.parse(responseBody);",
+											"",
+											"// Set new query start time",
+											"if (jsonData.NextStartUTC !== '') { ",
+											"    pm.environment.set('forwardStatusTimeHwm', jsonData.NextStartUTC);",
+											"    console.log(`Updated forwardStatusTimeHwm`);",
+											"}",
+											"console.log(`Next forward status time watermark: ${pm.environment.get('forwardStatusTimeHwm')}`);",
+											"",
+											"if (jsonData.Statuses) {",
+											"    tests[jsonData.Statuses.length + ' Statuses Retrieved'] = true;",
+											"    for (let i = 0; jsonData.Statuses[i]; i++) {",
+											"        const status = jsonData.Statuses[i];",
+											"        let stateStr = 'NONE';",
+											"        let errStr = 'NONE';",
+											"        switch (status.State) {",
+											"            case 0:",
+											"                stateStr = 'SUBMITTED';",
+											"                break;",
+											"            case 1:",
+											"                stateStr = 'RECEIVED';",
+											"                break;",
+											"            case 2:",
+											"                stateStr = 'ERROR';",
+											"                break;",
+											"            case 3:",
+											"                stateStr = 'FAILED';",
+											"                break;",
+											"            case 4:",
+											"                stateStr = 'TIMED OUT';",
+											"                break;",
+											"            case 5:",
+											"                stateStr = 'CANCELLED';",
+											"                break;",
+											"        }",
+											"        if (status.ErrorID !== 0) {",
+											"            switch (status.ErrorID) {",
+											"                case 12309:",
+											"                    errStr = '(12309: TIMED OUT)';",
+											"                    break;",
+											"                case 21810:",
+											"                    errStr = '(21810: INVALID WAKEUP INTERVAL)';",
+											"                    break;",
+											"                default:",
+											"                    errStr = `(${status.ErrorID})`;",
+											"            }",
+											"        }",
+											"        tests[`Message ID=${status.ForwardMessageID} state=${stateStr} error=${errStr}`] = status.ErrorID === 0;",
+											"    }   ",
+											"}",
+											"",
+											"tests['No more statuses to retrieve'] = jsonData.More === false;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/get_forward_statuses.json/?access_id={{access_id}}&password={{password}}&start_utc={{forwardStatusTimeHwm}}",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"get_forward_statuses.json",
+										""
+									],
+									"query": [
+										{
+											"key": "access_id",
+											"value": "{{access_id}}"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}"
+										},
+										{
+											"key": "start_utc",
+											"value": "{{forwardStatusTimeHwm}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let forwardStatusTimeHwm = pm.environment.get('forwardStatusTimeHwm');",
+									"if (pm.environment.get('forwardSubmitTime') !== '') {",
+									"    pm.environment.set('forwardStatusTimeHwm', pm.environment.get('forwardSubmitTime'));",
+									"    console.log(`Setting forward status watermark at last submit time`);",
+									"} else if (!forwardStatusTimeHwm) {",
+									"    forwardStatusTimeHwm = (new Date()).toISOString().substring(0, 19).replace('T', ' ');",
+									"    pm.environment.set('forwardStatusTimeHwm', forwardStatusTimeHwm);",
+									"    console.log(`Setting initial forward status watermark as Now`);",
+									"}",
+									"console.log(`Using forward status watermark: ${forwardStatusTimeHwm}`);"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "get previously submitted",
+					"item": [
+						{
+							"name": "get_forward_messages",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"",
+											"// Error Handling",
+											"if (jsonData.ErrorID !== 0) {",
+											"    switch (jsonData.ErrorID) {",
+											"        case 14:",
+											"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid Message ID\"] = jsonData.ErrorID !== 14;",
+											"            break;",
+											"        case 16:",
+											"            tests[\"ERROR \"+jsonData.ErrorID+\" - Too many requests\"] = jsonData.ErrorID !== 16;",
+											"            break;",
+											"        case 23:",
+											"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid web service parameter\"] = jsonData.ErrorID !== 23;",
+											"            break;",
+											"        case 21785:",
+											"            tests[\"ERROR \"+jsonData.ErrorID+\" - Authentication Failed\"] = jsonData.ErrorID !== 21785;",
+											"            break;",
+											"        case 21786:",
+											"            tests[\"ERROR \"+jsonData.ErrorID+\" - Invalid web service parameter\"] = jsonData.ErrorID !== 21786;",
+											"            break;",
+											"        default:",
+											"            tests[\"ERROR \"+jsonData.ErrorID] = jsonData.ErrorID === 0;",
+											"    }",
+											"} else {",
+											"    tests[\"No error\"] = jsonData.ErrorID === 0;",
+											"}",
+											"",
+											"//tests[\"mess = 0\"] = jsonData.Messages === null;",
+											"if (jsonData.Messages) {",
+											"   var encoded = 0;",
+											"   var pending = 0;",
+											"   var delivered = 0;",
+											"   var failed = 0;",
+											"   var cancelled = 0;",
+											"   for (i = 0; i < jsonData.Messages.length; i++) {",
+											"        if (jsonData.Messages.Payload && jsonData.Messages.Payload.Fields) { encoded++ }",
+											"        var stateStr;",
+											"        switch (jsonData.Messages[i].State) {",
+											"            case 0:",
+											"                stateStr = \"SUBMITTED\";",
+											"                pending++;",
+											"                break;",
+											"            case 1:",
+											"                stateStr = \"RECEIVED\";",
+											"                delivered++;",
+											"                break;",
+											"            case 2:",
+											"                stateStr = \"ERROR\";",
+											"                failed++;",
+											"                break;",
+											"            case 3:",
+											"                stateStr = \"FAILED\";",
+											"                failed++;",
+											"                break;",
+											"            case 4:",
+											"                stateStr = \"TIMED OUT\";",
+											"                failed++;",
+											"                break;",
+											"            case 5:",
+											"                stateStr = \"CANCELLED\";",
+											"                cancelled++;",
+											"                break;",
+											"        }",
+											"        var errStr = \"\";",
+											"        if (jsonData.Messages[i].ErrorID !== 0) {",
+											"            switch (jsonData.Statuses[i].ErrorID) {",
+											"                case 12309:",
+											"                    errStr = \" (12309: TIMED OUT)\";",
+											"                    break;",
+											"                case 21810:",
+											"                    errStr = \" (21810: INVALID WAKEUP INTERVAL)\";",
+											"                    break;",
+											"                default:",
+											"                    errStr = \" (\"+jsonData.Statuses[i].ErrorID+\")\";",
+											"            }",
+											"            tests[\"Message ID: \"+jsonData.Messages[i].ID+\"error: \"+errStr] = jsonData.Messages[i].ErrorID !== 0;",
+											"        }",
+											"   }",
+											"   tests[\"Forward messages Retrieved: \"+jsonData.Messages.length+\" | Pending: \"+pending+\" | Delivered: \"+delivered+\" | Failed: \"+failed+\" | Encoded: \"+encoded] = jsonData.Messages.length > 0;",
+											"}",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/get_forward_messages.json/?access_id={{access_id}}&password={{password}}&fwIDs={{fwIDs}}",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"get_forward_messages.json",
+										""
+									],
+									"query": [
+										{
+											"key": "access_id",
+											"value": "{{access_id}}"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}"
+										},
+										{
+											"key": "fwIDs",
+											"value": "{{fwIDs}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "cancel pending",
+					"item": [
+						{
+							"name": "submit_cancellations (lastSubmit)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = JSON.parse(responseBody);",
+											"if (jsonData.Submissions) {",
+											"    const attempted = pm.environment.get('lastFwdMsgId');",
+											"    const cancellation = jsonData.Submissions[0];",
+											"    if (cancellation.ErrorID === 115) {",
+											"        tests[`Unable to cancel ${attempted}`] = false;",
+											"    } else {",
+											"        pm.environment.set('cancellationId', submission.ForwardMessageID);",
+											"        tests[`Cancellation ${submission.ForwardMessageID} pending for previous message ${attempted}`] = true;",
+											"    }",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const previouslySubmitted = (pm.environment.get('fwIDs')).split(',');\r",
+											"const lastSubmitted = previouslySubmitted[previouslySubmitted.length - 1];\r",
+											"pm.environment.set('lastFwdMsgId', lastSubmitted);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/submit_cancelations.json/?access_id={{access_id}}&password={{password}}&fwIDs={{lastFwdMsgId}}",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"submit_cancelations.json",
+										""
+									],
+									"query": [
+										{
+											"key": "access_id",
+											"value": "{{access_id}}"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}"
+										},
+										{
+											"key": "fwIDs",
+											"value": "{{lastFwdMsgId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_forward_statuses (cancellation)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const jsonData = JSON.parse(responseBody);",
+											"const status = jsonData.Statuses[0];",
+											"tests['Cancelled'] = (status.IsClosed === true && status.State === 8);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{TransportMethod}}{{BaseURL}}/get_forward_statuses.json/?access_id={{access_id}}&password={{password}}&fwIDs={{cancellationId}}",
+									"host": [
+										"{{TransportMethod}}{{BaseURL}}"
+									],
+									"path": [
+										"get_forward_statuses.json",
+										""
+									],
+									"query": [
+										{
+											"key": "access_id",
+											"value": "{{access_id}}"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}"
+										},
+										{
+											"key": "fwIDs",
+											"value": "{{cancellationId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "device metadata",
+			"item": [
+				{
+					"name": "get_mobiles_paged",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"if (jsonData.Mobiles.length > 0) {",
+									"    tests[jsonData.Mobiles.length + ' Mobiles listed'] = jsonData.ErrorID === 0;",
+									"    for (let i = 0; i < jsonData.Mobiles.length; i++) {",
+									"        const mobile = jsonData.Mobiles[i];",
+									"        tests[`Mobile found: ${JSON.stringify(mobile)}`] = true;",
+									"        if (i === jsonData.Mobiles.length - 1) {",
+									"            pm.environment.set(\"nextMobilePaged\", mobile.ID);",
+									"        }",
+									"    }",
+									"} else {",
+									"    tests[\"No more pages\"] = jsonData.ErrorID === 0;",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "ClientId",
+								"value": "YXA61ApyiirlEeWUXwcTI_CBog"
+							},
+							{
+								"key": "ClientSecret",
+								"value": "YXA6mmpOCkerMdVwHxfmOqvSV03Rk-s"
+							}
+						],
+						"url": {
+							"raw": "{{TransportMethod}}{{BaseURL}}/get_mobiles_paged.json/?access_id={{access_id}}&password={{password}}&page_size=1000",
+							"host": [
+								"{{TransportMethod}}{{BaseURL}}"
+							],
+							"path": [
+								"get_mobiles_paged.json",
+								""
+							],
+							"query": [
+								{
+									"key": "access_id",
+									"value": "{{access_id}}"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}"
+								},
+								{
+									"key": "page_size",
+									"value": "1000"
+								},
+								{
+									"key": "since_mobile",
+									"value": "{{nextMobilePaged}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_broadcast_ids",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"",
+									"if (jsonData.Mobiles.length > 0) {",
+									"    tests[jsonData.Mobiles.length + ' Mobiles listed'] = jsonData.ErrorID === 0;",
+									"    for (let i = 0; i < jsonData.Mobiles.length; i++) {",
+									"        const mobile = jsonData.Mobiles[i];",
+									"        tests[`Mobile found: ${JSON.stringify(mobile)}`] = true;",
+									"        if (i === jsonData.Mobiles.length - 1) {",
+									"            pm.environment.set(\"nextMobilePaged\", mobile.ID);",
+									"        }",
+									"    }",
+									"} else {",
+									"    tests[\"No more pages\"] = jsonData.ErrorID === 0;",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{TransportMethod}}{{BaseURL}}/get_broadcast_infos.json/?access_id={{access_id}}&password={{password}}",
+							"host": [
+								"{{TransportMethod}}{{BaseURL}}"
+							],
+							"path": [
+								"get_broadcast_infos.json",
+								""
+							],
+							"query": [
+								{
+									"key": "access_id",
+									"value": "{{access_id}}"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"tests[\"Response OK\"] = responseCode.code === 200;",
+					"const jsonData = JSON.parse(responseBody);",
+					"if (jsonData.hasOwnProperty('ErrorID') && jsonData.ErrorID !== 0) {",
+					"    tests[`API ERROR (${jsonData.ErrorID})`] = false;",
+					"} else {",
+					"    tests['No API Errors'] = true;",
+					"}"
+				]
+			}
+		}
+	]
+}
