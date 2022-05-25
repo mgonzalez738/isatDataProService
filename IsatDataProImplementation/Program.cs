@@ -17,7 +17,18 @@ namespace IsatDataProImplementation
                 .CreateLogger();
 
             // Initializes IsatData Pro Service
-            IsatDataProService service = new();
+            IsatDataProService service = new("id", "password");
+
+            string version = "";
+            try
+            {
+                version = await service.GetInfoVersionAsync();
+                await service.GetReturnMessagesSinceUtcAsync(DateTime.Now, true, true);
+            }
+            catch { }
+
+            Console.WriteLine($"MGS API Version: {version}");
+
 
             Console.ReadLine();
 
