@@ -22,7 +22,7 @@ namespace Gie.IsatDataPro
 
         private readonly ILogger _log;
         private HttpClient _httpClient;
-        private List<IsatDataProApiError> _errorList;
+        private List<ErrorInfo> _errorList;
         private string _accessId;
         private string _accessPassword;
         private const string _baseApiUrl = "https://api.inmarsat.com/v1/idp/gateway/rest/";
@@ -122,7 +122,7 @@ namespace Gie.IsatDataPro
                     _errorList = new();
                     foreach (var error in list)
                     {
-                        _errorList.Add(JsonConvert.DeserializeObject<IsatDataProApiError>(error.ToString()));
+                        _errorList.Add(JsonConvert.DeserializeObject<ErrorInfo>(error.ToString()));
                     }
                 }
                 catch (Exception ex)
@@ -179,10 +179,10 @@ namespace Gie.IsatDataPro
         /// Gets a list of supported error definitions
         /// </summary>
         /// <returns>Collection of errors definitions supported by the MGS</returns>
-        public async Task<List<IsatDataProApiError>> GetInfoErrorsAsync()
+        public async Task<List<ErrorInfo>> GetInfoErrorsAsync()
         {
             const string relativeUrl = "info_errors.json/";
-            List<IsatDataProApiError> errorList = new();
+            List<ErrorInfo> errorList = new();
 
             try
             {
@@ -199,7 +199,7 @@ namespace Gie.IsatDataPro
                 // Parses each object as IsatDataProApiError
                 foreach(var error in list)
                 {
-                    errorList.Add(JsonConvert.DeserializeObject<IsatDataProApiError>(error.ToString()));
+                    errorList.Add(JsonConvert.DeserializeObject<ErrorInfo>(error.ToString()));
                 }
 
                 _log.Debug($"Method {nameof(GetInfoErrorsAsync)} executed.");
