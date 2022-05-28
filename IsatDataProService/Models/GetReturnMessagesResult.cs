@@ -18,7 +18,7 @@ namespace Gie.IsatDataPro.Models
         public bool More { get; set; }
 
         /// <summary>
-        /// The next start time high water mark for a subsequent get_return_messages call. Null indicates no more messages are pending.
+        /// The next start time high water mark for a subsequent get_return_messages call. 1/1/0001 00:00:00 indicates no more messages are pending.
         /// </summary>
         public DateTime NextStartUTC { get; set; }
 

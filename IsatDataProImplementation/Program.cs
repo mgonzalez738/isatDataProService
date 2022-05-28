@@ -18,23 +18,24 @@ namespace IsatDataProImplementation
 
             // Initializes IsatData Pro Service
             IsatDataProService service = new("id", "password");
-
-            string version = "";
             try
             {
-                version = await service.GetInfoVersionAsync();
-                await service.GetReturnMessagesSinceUtcAsync(DateTime.Now, true, true);
+                string version = await IsatDataProMgsApi.GetInfoVersionAsync();
+                Console.WriteLine($"MGS API Version: {version}");
             }
             catch { }
+            
 
-            Console.WriteLine($"MGS API Version: {version}");
+            var dateTime = await IsatDataProMgsApi.GetInfoUtcTimeAsync();
+            Console.WriteLine($"MGS API DateTime: {dateTime}");
 
+
+
+            service.Start(30);
 
             Console.ReadLine();
 
-
-            
-                       
+                      
         }
     }
 }

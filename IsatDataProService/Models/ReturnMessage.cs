@@ -1,41 +1,56 @@
-﻿namespace Gie.IsatDataPro.Models
+﻿using System;
+
+namespace Gie.IsatDataPro.Models
 {
     /// <summary>
-    /// A decoded message payload derived from a Message Definition File provisioned on the Mailbox.
+    /// A Mobile-Originated message including metadata.
     /// </summary>
-    public class Payload
+    public class ReturnMessage
     {
         /// <summary>
-        /// The name of the message, unique within the defined SIN.
+        /// A unique ID assigned by the network.
         /// </summary>
-        public string Name { get; set; }
+        public int ID { get; set; }
 
         /// <summary>
-        /// The Service Identification Number, also the first byte of raw payload.
+        /// The datetime (UTC) the message was made available in the Mailbox.
         /// </summary>
-        /// <remarks>
-        /// Used to define a set of related messages or remote operations. 
-        /// SIN is intended as a context encapsulating both Return and Forward messages defined in a Message Definition File.
-        /// </remarks>
+        public DateTime MessageUTC { get; set; }
+
+        /// <summary>
+        /// The unique Mobile ID that sent the message.
+        /// </summary>
+        public string MobileID { get; set; }
+
+        /// <summary>
+        /// The datetime (UTC) the message was received at the Satellite Access Station (aka Land Earth Station).
+        /// </summary>
+        public DateTime ReceiveUTC { get; set; }
+
+        /// <summary>
+        /// The system name of the satellite beam the message was received on.
+        /// </summary>
+        public string RegionName { get; set; }
+
+        /// <summary>
+        /// The Service Identification Number represented by the first payload byte.
+        /// </summary>
         public byte SIN { get; set; }
 
         /// <summary>
-        /// The Message Identification Number, also the second byte of raw payload.
+        /// The size of the message (in bytes) sent over-the-air.
         /// </summary>
-        /// <remarks>
-        /// Used to define a message or remote operation within a SIN context. 
-        /// MIN are intended to represent a specific directional operation and are often paired as Forward request with Return response.
-        /// </remarks>
-        public byte MIN { get; set; }
+        public int OTAMessageSize { get; set; }
 
         /// <summary>
-        /// Indicates if the message is Forward/Mobile-Terminated.
+        /// A decoded message payload derived from a Message Definition File provisioned on the Mailbox.
         /// </summary>
-        public bool IsForward { get; set; }
+        public Payload Payload { get; set; }
 
         /// <summary>
-        /// An array of decoded message data fields derived from a Message Definition File provisioned on the Mailbox.
+        /// An array of payload byte values in decimal format.
         /// </summary>
-        public object[] Fields { get; set; }
+        public int[] RawPayload { get; set; }
     }
 }
+
