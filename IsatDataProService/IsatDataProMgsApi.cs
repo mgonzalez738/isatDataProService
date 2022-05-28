@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Gie.IsatDataPro.Extensions;
 using Gie.IsatDataPro.Models;
+using System.Text;
+using System.Net.Http.Headers;
 
 namespace Gie.IsatDataPro
 {
@@ -33,7 +35,7 @@ namespace Gie.IsatDataPro
         /// <returns>Current MGS datetime.</returns>
         public static async Task<DateTime> GetInfoUtcTimeAsync()
         {
-            try { return await _getInfoUtcTimeAsync(_client); }
+            try { return await GetInfoUtcTimeImplAsync(_client); }
             catch { throw; }
         }
 
@@ -44,7 +46,7 @@ namespace Gie.IsatDataPro
         /// <returns>Current MGS datetime.</returns>
         public static async Task<DateTime> GetInfoUtcTimeAsync(HttpClient client)
         {
-            try { return await _getInfoUtcTimeAsync(client); }
+            try { return await GetInfoUtcTimeImplAsync(client); }
             catch { throw; }
         }
 
@@ -54,7 +56,7 @@ namespace Gie.IsatDataPro
         /// <returns>List of supported error definitions.</returns>
         public static async Task<List<ErrorInfo>> GetInfoErrorsAsync()
         {
-            try { return await _getInfoErrorsAsync(_client); }
+            try { return await GetInfoErrorsImplAsync(_client); }
             catch { throw; }
         }
 
@@ -65,7 +67,7 @@ namespace Gie.IsatDataPro
         /// <returns>List of supported error definitions.</returns>
         public static async Task<List<ErrorInfo>> GetInfoErrorsAsync(HttpClient client)
         {
-            try { return await _getInfoErrorsAsync(client); }
+            try { return await GetInfoErrorsImplAsync(client); }
             catch { throw; }
         }
 
@@ -75,7 +77,7 @@ namespace Gie.IsatDataPro
          /// <returns>Current MGS version.</returns>
         public static async Task<string> GetInfoVersionAsync()
         {
-            try { return await _getInfoVersionAsync(_client); }
+            try { return await GetInfoVersionImplAsync(_client); }
             catch { throw; }
         }
 
@@ -86,7 +88,7 @@ namespace Gie.IsatDataPro
         /// <returns>Current MGS version.</returns>
         public static async Task<string> GetInfoVersionAsync(HttpClient client)
         {
-            try { return await _getInfoVersionAsync(client); }
+            try { return await GetInfoVersionImplAsync(client); }
             catch { throw; }
         }
 
@@ -101,7 +103,7 @@ namespace Gie.IsatDataPro
         /// <returns>GetReturnMessagesResult object that holds API response.</returns>
         public static async Task<GetReturnMessagesResult> GetReturnMessagesAsync(string accessId, string accessPassword, bool includeRawPayload, bool includeType, DateTime startUtc)
         {
-            try { return await _getReturnMessagesAsync(_client, accessId, accessPassword, includeRawPayload, includeType, startUtc); }
+            try { return await GetReturnMessagesImplAsync(_client, accessId, accessPassword, includeRawPayload, includeType, startUtc); }
             catch { throw; }
         }
 
@@ -117,7 +119,7 @@ namespace Gie.IsatDataPro
         /// <returns>GetReturnMessagesResult object that holds API response.</returns>
         public static async Task<GetReturnMessagesResult> GetReturnMessagesAsync(string accessId, string accessPassword, bool includeRawPayload, bool includeType, DateTime startUtc, string mobileId)
         {
-            try { return await _getReturnMessagesAsync(_client, accessId, accessPassword, includeRawPayload, includeType, startUtc, mobileId); }
+            try { return await GetReturnMessagesImplAsync(_client, accessId, accessPassword, includeRawPayload, includeType, startUtc, mobileId); }
             catch { throw; }
         }
 
@@ -132,7 +134,7 @@ namespace Gie.IsatDataPro
         /// <returns>GetReturnMessagesResult object that holds API response.</returns>
         public static async Task<GetReturnMessagesResult> GetReturnMessagesAsync(string accessId, string accessPassword, bool includeRawPayload, bool includeType, int fromId)
         {
-            try { return await _getReturnMessagesAsync(_client, accessId, accessPassword, includeRawPayload, includeType, fromId); }
+            try { return await GetReturnMessagesImplAsync(_client, accessId, accessPassword, includeRawPayload, includeType, fromId); }
             catch { throw; }
         }
 
@@ -148,7 +150,7 @@ namespace Gie.IsatDataPro
         /// <returns>GetReturnMessagesResult object that holds API response.</returns>
         public static async Task<GetReturnMessagesResult> GetReturnMessagesAsync(string accessId, string accessPassword, bool includeRawPayload, bool includeType, int fromId, string mobileId)
         {
-            try { return await _getReturnMessagesAsync(_client, accessId, accessPassword, includeRawPayload, includeType, fromId, mobileId); }
+            try { return await GetReturnMessagesImplAsync(_client, accessId, accessPassword, includeRawPayload, includeType, fromId, mobileId); }
             catch { throw; }
         }
 
@@ -164,7 +166,7 @@ namespace Gie.IsatDataPro
         /// <returns>GetReturnMessagesResult object that holds API response.</returns>
         public static async Task<GetReturnMessagesResult> GetReturnMessagesAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, DateTime startUtc)
         {
-            try { return await _getReturnMessagesAsync(client, accessId, accessPassword, includeRawPayload, includeType, startUtc); }
+            try { return await GetReturnMessagesImplAsync(client, accessId, accessPassword, includeRawPayload, includeType, startUtc); }
             catch { throw; }
         }
 
@@ -181,7 +183,7 @@ namespace Gie.IsatDataPro
         /// <returns>GetReturnMessagesResult object that holds API response.</returns>
         public static async Task<GetReturnMessagesResult> GetReturnMessagesAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, DateTime startUtc, string mobileId)
         {
-            try { return await _getReturnMessagesAsync(client, accessId, accessPassword, includeRawPayload, includeType, startUtc, mobileId); }
+            try { return await GetReturnMessagesImplAsync(client, accessId, accessPassword, includeRawPayload, includeType, startUtc, mobileId); }
             catch { throw; }
         }
 
@@ -197,7 +199,7 @@ namespace Gie.IsatDataPro
         /// <returns>GetReturnMessagesResult object that holds API response.</returns>
         public static async Task<GetReturnMessagesResult> GetReturnMessagesAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, int fromId)
         {
-            try { return await _getReturnMessagesAsync(client, accessId, accessPassword, includeRawPayload, includeType, fromId); }
+            try { return await GetReturnMessagesImplAsync(client, accessId, accessPassword, includeRawPayload, includeType, fromId); }
             catch { throw; }
         }
 
@@ -214,7 +216,34 @@ namespace Gie.IsatDataPro
         /// <returns>GetReturnMessagesResult object that holds API response.</returns>
         public static async Task<GetReturnMessagesResult> GetReturnMessagesAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, int fromId, string mobileId)
         {
-            try { return await _getReturnMessagesAsync(client, accessId, accessPassword, includeRawPayload, includeType, fromId, mobileId); }
+            try { return await GetReturnMessagesImplAsync(client, accessId, accessPassword, includeRawPayload, includeType, fromId, mobileId); }
+            catch { throw; }
+        }
+
+        /// <summary>
+        /// Submits one or more Mobile-Terminated messages to the MGS to deliver. 
+        /// </summary>
+        /// <param name="accessId">MGS Mailbox access Id.</param>
+        /// <param name="accessPassword">MGS Mailbox access password.</param>
+        /// <param name="messages">A Mobile-Terminated messages list.</param>
+        /// <returns>SubmitMessagesResult object that holds API response.</returns>
+        public static async Task<SubmitMessagesResult> SubmitMessagesAsync(string accessId, string accessPassword, ForwardMessage[] messages)
+        {
+            try { return await SubmitMessagesImplAsync(_client, accessId, accessPassword, messages); }
+            catch { throw; }
+        }
+
+        /// <summary>
+        /// Submits one or more Mobile-Terminated messages to the MGS to deliver. 
+        /// </summary>
+        /// <param name="client">HttpClient instance to use.</param>
+        /// <param name="accessId">MGS Mailbox access Id.</param>
+        /// <param name="accessPassword">MGS Mailbox access password.</param>
+        /// <param name="messages">A Mobile-Terminated messages list.</param>
+        /// <returns>SubmitMessagesResult object that holds API response.</returns>
+        public static async Task<SubmitMessagesResult> SubmitMessagesAsync(HttpClient client, string accessId, string accessPassword, ForwardMessage[] messages)
+        {
+            try { return await SubmitMessagesImplAsync(client, accessId, accessPassword, messages); }
             catch { throw; }
         }
 
@@ -222,7 +251,7 @@ namespace Gie.IsatDataPro
 
         #region Private Methods
 
-        private static async Task<DateTime> _getInfoUtcTimeAsync(HttpClient client)
+        private static async Task<DateTime> GetInfoUtcTimeImplAsync(HttpClient client)
         {
             const string endpoint = "info_utc_time.json/";
 
@@ -246,7 +275,7 @@ namespace Gie.IsatDataPro
             catch { throw; }
         }
 
-        private static async Task<List<ErrorInfo>> _getInfoErrorsAsync(HttpClient client)
+        private static async Task<List<ErrorInfo>> GetInfoErrorsImplAsync(HttpClient client)
         {
             const string endpoint = "info_errors.json/";
             List<ErrorInfo> errorList = new();
@@ -276,7 +305,7 @@ namespace Gie.IsatDataPro
             catch { throw; }
         }
 
-        private static async Task<string> _getInfoVersionAsync(HttpClient client)
+        private static async Task<string> GetInfoVersionImplAsync(HttpClient client)
         {
             const string endpoint = "info_version.json/";
             try
@@ -299,7 +328,7 @@ namespace Gie.IsatDataPro
             catch { throw; }
         }
 
-        private static async Task<GetReturnMessagesResult> _getReturnMessagesAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, DateTime startUtc)
+        private static async Task<GetReturnMessagesResult> GetReturnMessagesImplAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, DateTime startUtc)
         {
             string endpoint = $"get_return_messages.json/?access_id={accessId}&password={accessPassword}&start_utc={startUtc}&include_raw_payload={includeRawPayload}&include_type={includeType}";
 
@@ -326,7 +355,7 @@ namespace Gie.IsatDataPro
             catch { throw; }
         }
 
-        private static async Task<GetReturnMessagesResult> _getReturnMessagesAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, DateTime startUtc, string mobileId)
+        private static async Task<GetReturnMessagesResult> GetReturnMessagesImplAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, DateTime startUtc, string mobileId)
         {
             string endpoint = $"get_return_messages.json/?access_id={accessId}&password={accessPassword}&start_utc={startUtc}&include_raw_payload={includeRawPayload}&include_type={includeType}&mobile_id={mobileId}";
 
@@ -353,7 +382,7 @@ namespace Gie.IsatDataPro
             catch { throw; }
         }
 
-        private static async Task<GetReturnMessagesResult> _getReturnMessagesAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, int fromId)
+        private static async Task<GetReturnMessagesResult> GetReturnMessagesImplAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, int fromId)
         {
             string endpoint = $"get_return_messages.json/?access_id={accessId}&password={accessPassword}&from_id={fromId}&include_raw_payload={includeRawPayload}&include_type={includeType}";
 
@@ -380,7 +409,7 @@ namespace Gie.IsatDataPro
             catch { throw; }
         }
 
-        private static async Task<GetReturnMessagesResult> _getReturnMessagesAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, int fromId, string mobileId)
+        private static async Task<GetReturnMessagesResult> GetReturnMessagesImplAsync(HttpClient client, string accessId, string accessPassword, bool includeRawPayload, bool includeType, int fromId, string mobileId)
         {
             string endpoint = $"get_return_messages.json/?access_id={accessId}&password={accessPassword}&from_id={fromId}&include_raw_payload={includeRawPayload}&include_type={includeType}&mobile_id={mobileId}";
 
@@ -403,6 +432,38 @@ namespace Gie.IsatDataPro
 
                 // Returns result
                 return result;
+            }
+            catch { throw; }
+        }
+
+        private static async Task<SubmitMessagesResult> SubmitMessagesImplAsync(HttpClient client, string accessId, string accessPassword, ForwardMessage[] messages)
+        {
+            const string endpoint = "submit_messages.json/";
+            try
+            {
+                // Creates the content of the POST operation
+                SubmitForwardMessage body = new()
+                {
+                    AccessID = accessId,
+                    Password = accessPassword,
+                    Messages = messages
+                };
+                var requestContent = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
+                //requestContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var stringContent = await requestContent.ReadAsStringAsync();
+                // Sends Api request
+                HttpResponseMessage response = await client.PostAsync(endpoint, requestContent);
+
+                // Checks OK response
+                response.EnsureSuccessStatusCode();
+                // Checks that response is json type
+                response.EnsureJsonContentType();
+                // Gets Response contents as string
+                string responseContent = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<JObject>(responseContent);
+
+                // Returns result
+                return result.Property("SubmitForwardMessages_JResult").Value.ToObject<SubmitMessagesResult>();
             }
             catch { throw; }
         }
