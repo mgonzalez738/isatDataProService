@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gie.IsatDataPro.Models
+namespace Gie.IsatDataPro
 {
     /// <summary>
     /// Holds a response from a get_return_messages call.

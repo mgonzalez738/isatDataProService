@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gie.IsatDataPro.Models
+namespace Gie.IsatDataPro
 {
     /// <summary>
     /// Response to submit_cancelations or submit_messages_to_destinations.

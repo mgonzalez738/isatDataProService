@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Gie.IsatDataPro;
-using Gie.IsatDataPro.Models;
 using Newtonsoft.Json;
 using Serilog;
 
@@ -30,8 +29,8 @@ namespace IsatDataProImplementation
             var dateTime = await IsatDataProMgsApi.GetInfoUtcTimeAsync();
             Console.WriteLine($"MGS API DateTime: {dateTime}");
 
-            ForwardMessage[] messages = Array.Empty<ForwardMessage>();
-            var result = await IsatDataProMgsApi.SubmitMessagesAsync("id", "pass", messages);
+            //ForwardMessage[] messages = Array.Empty<ForwardMessage>();
+            var result = await IsatDataProMgsApi.GetForwardStatusesAsync("id", "pass", DateTime.Now);
 
             service.Start(30);
 

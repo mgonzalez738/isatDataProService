@@ -1,29 +1,41 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 
-namespace Gie.IsatDataPro.Models
+namespace Gie.IsatDataPro
 {
     /// <summary>
-    /// The body of the POST operation for submit_messages.
+    /// Metadata relating to the Forward message submission.
     /// </summary>
-    [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
-    public class SubmitForwardMessage
+    public class ForwardStatus
     {
         /// <summary>
-        /// The Mailbox Access ID credential.
+        /// The system-generated ID for the Mobile-Terminated message submitted.
         /// </summary>
-        public string AccessID { get; set; }
+        public string ForwardMessageID { get; set; }
 
         /// <summary>
-        /// The Mailbox Password credential.
+        /// True if the message was delivered or failed.
         /// </summary>
-        public string Password { get; set; }
+        public bool IsClosed { get; set; }
 
         /// <summary>
-        /// The list of messages to be sent.
+        /// The latest state of the Forward message.
         /// </summary>
-        public ForwardMessage[] Messages { get; set; }
+        public SubmitMessageState State { get; set; }
+
+        /// <summary>
+        /// The error ID associated with the message state.
+        /// </summary>
+        public int ErrorID { get; set; }
+
+        /// <summary>
+        /// The datetime (UTC) of the State of the message.
+        /// </summary>
+        public DateTime StateUTC { get; set; }
+
+        /// <summary>
+        /// System-assigned reference number.
+        /// </summary>
+        public int ReferenceNumber { get; set; }
     }
 }
 

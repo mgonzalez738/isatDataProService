@@ -1,4 +1,4 @@
-﻿namespace Gie.IsatDataPro.Models
+﻿namespace Gie.IsatDataPro
 {
     /// <summary>
     /// A decoded message payload derived from a Message Definition File provisioned on the Mailbox.

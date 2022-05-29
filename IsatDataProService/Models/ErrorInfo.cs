@@ -1,4 +1,4 @@
-﻿namespace Gie.IsatDataPro.Models
+﻿namespace Gie.IsatDataPro
 {
     /// <summary>
     /// Errors definitions supported by the MGS.

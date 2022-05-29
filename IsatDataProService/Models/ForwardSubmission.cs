@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gie.IsatDataPro.Models
+namespace Gie.IsatDataPro
 {
     /// <summary>
     /// Metadata relating to a submitted Mobile-Terminated message.

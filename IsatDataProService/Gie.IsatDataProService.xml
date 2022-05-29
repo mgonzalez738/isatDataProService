@@ -1,0 +1,584 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Gie.IsatDataProService</name>
+    </assembly>
+    <members>
+        <member name="T:Gie.IsatDataPro.Extensions.HttpResponseMessageExtensions">
+            <summary>
+            Custom extension methods for HttpResponseMessage class.
+            </summary>
+        </member>
+        <member name="M:Gie.IsatDataPro.Extensions.HttpResponseMessageExtensions.EnsureJsonContentType(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Throws an excewption if HttpResponseMessage.Content.Headers.ContentType.MediaType is not application/json
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.IsatDataProMgsApi">
+            <summary>
+            IsatData Pro Message Gateway Service (MGS) API client functions.
+            </summary>
+        </member>
+        <member name="F:Gie.IsatDataPro.IsatDataProMgsApi.BaseUrl">
+            <summary>
+            MGS API base url.
+            </summary>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetInfoUtcTimeAsync">
+            <summary>
+            Gets current MGS time.
+            </summary>
+            <returns>Current MGS datetime.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetInfoUtcTimeAsync(System.Net.Http.HttpClient)">
+            <summary>
+            Gets current MGS time. 
+            </summary>
+            <param name="client">HttpClient instance to use.</param>
+            <returns>Current MGS datetime.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetInfoErrorsAsync">
+            <summary>
+            Gets a list of supported error definitions.
+            </summary>
+            <returns>List of supported error definitions.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetInfoErrorsAsync(System.Net.Http.HttpClient)">
+            <summary>
+            Gets a list of supported error definitions.
+            </summary>
+            <param name="client">HttpClient instance to use.</param>
+            <returns>List of supported error definitions.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetInfoVersionAsync">
+            <summary>
+            Gets current MGS version. 
+            </summary>
+            <returns>Current MGS version.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetInfoVersionAsync(System.Net.Http.HttpClient)">
+            <summary>
+            Gets current MGS version. 
+            </summary>
+            <param name="client">HttpClient instance to use.</param>
+            <returns>Current MGS version.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetReturnMessagesAsync(System.String,System.String,System.Boolean,System.Boolean,System.DateTime)">
+            <summary>
+            Retrieves Mobile-Originated messages (up to 500) based on a start-time.
+            </summary>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="includeRawPayload">Returns an array of bytes even if decoded payload is available.RawPayload is returned automatically if no Message Definition File defines payload decoding for the Mailbox.</param>
+            <param name="includeType">Includes data type when using a Message Definition File on the Mailbox.</param>
+            <param name="startUtc">Messages sent from this start time reference (UTC) or later will be retrieved.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetReturnMessagesAsync(System.String,System.String,System.Boolean,System.Boolean,System.DateTime,System.String)">
+            <summary>
+            Retrieves Mobile-Originated messages (up to 500) based on a start-time.
+            </summary>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="includeRawPayload">Returns an array of bytes even if decoded payload is available.RawPayload is returned automatically if no Message Definition File defines payload decoding for the Mailbox.</param>
+            <param name="includeType">Includes data type when using a Message Definition File on the Mailbox.</param>
+            <param name="startUtc">Messages sent from this start time reference (UTC) or later will be retrieved.</param>
+            <param name="mobileId">Filter to retrieve only messages sent by this Mobile ID.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetReturnMessagesAsync(System.String,System.String,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Retrieves Mobile-Originated messages (up to 500) based on ID of a previously retrieved message.
+            </summary>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="includeRawPayload">Returns an array of bytes even if decoded payload is available.RawPayload is returned automatically if no Message Definition File defines payload decoding for the Mailbox.</param>
+            <param name="includeType">Includes data type when using a Message Definition File on the Mailbox.</param>
+            <param name="fromId">A unique ID of a previously retrieved message, typically derived from NextStartID parameter of a prior get_return_messages operation where More messages are available to retrieve.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetReturnMessagesAsync(System.String,System.String,System.Boolean,System.Boolean,System.Int32,System.String)">
+            <summary>
+            Retrieves Mobile-Originated messages (up to 500) based on ID of a previously retrieved message.
+            </summary>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="includeRawPayload">Returns an array of bytes even if decoded payload is available.RawPayload is returned automatically if no Message Definition File defines payload decoding for the Mailbox.</param>
+            <param name="includeType">Includes data type when using a Message Definition File on the Mailbox.</param>
+            <param name="fromId">A unique ID of a previously retrieved message, typically derived from NextStartID parameter of a prior get_return_messages operation where More messages are available to retrieve.</param>
+            <param name="mobileId">Filter to retrieve only messages sent by this Mobile ID.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetReturnMessagesAsync(System.Net.Http.HttpClient,System.String,System.String,System.Boolean,System.Boolean,System.DateTime)">
+            <summary>
+            Retrieves Mobile-Originated messages (up to 500) based on a start-time.
+            </summary>
+            <param name="client">HttpClient instance to use.</param>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="includeRawPayload">Returns an array of bytes even if decoded payload is available.RawPayload is returned automatically if no Message Definition File defines payload decoding for the Mailbox.</param>
+            <param name="includeType">Includes data type when using a Message Definition File on the Mailbox.</param>
+            <param name="startUtc">Messages sent from this start time reference (UTC) or later will be retrieved.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetReturnMessagesAsync(System.Net.Http.HttpClient,System.String,System.String,System.Boolean,System.Boolean,System.DateTime,System.String)">
+            <summary>
+            Retrieves Mobile-Originated messages (up to 500) based on a start-time.
+            </summary>
+            <param name="client">HttpClient instance to use.</param>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="includeRawPayload">Returns an array of bytes even if decoded payload is available.RawPayload is returned automatically if no Message Definition File defines payload decoding for the Mailbox.</param>
+            <param name="includeType">Includes data type when using a Message Definition File on the Mailbox.</param>
+            <param name="startUtc">Messages sent from this start time reference (UTC) or later will be retrieved.</param>
+            <param name="mobileId">Filter to retrieve only messages sent by this Mobile ID.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetReturnMessagesAsync(System.Net.Http.HttpClient,System.String,System.String,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Retrieves Mobile-Originated messages (up to 500) based on ID of a previously retrieved message.
+            </summary>
+            <param name="client">HttpClient instance to use.</param>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="includeRawPayload">Returns an array of bytes even if decoded payload is available.RawPayload is returned automatically if no Message Definition File defines payload decoding for the Mailbox.</param>
+            <param name="includeType">Includes data type when using a Message Definition File on the Mailbox.</param>
+            <param name="fromId">A unique ID of a previously retrieved message, typically derived from NextStartID parameter of a prior get_return_messages operation where More messages are available to retrieve.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetReturnMessagesAsync(System.Net.Http.HttpClient,System.String,System.String,System.Boolean,System.Boolean,System.Int32,System.String)">
+            <summary>
+            Retrieves Mobile-Originated messages (up to 500) based on ID of a previously retrieved message.
+            </summary>
+            <param name="client">HttpClient instance to use.</param>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="includeRawPayload">Returns an array of bytes even if decoded payload is available.RawPayload is returned automatically if no Message Definition File defines payload decoding for the Mailbox.</param>
+            <param name="includeType">Includes data type when using a Message Definition File on the Mailbox.</param>
+            <param name="fromId">A unique ID of a previously retrieved message, typically derived from NextStartID parameter of a prior get_return_messages operation where More messages are available to retrieve.</param>
+            <param name="mobileId">Filter to retrieve only messages sent by this Mobile ID.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.SubmitMessagesAsync(System.String,System.String,Gie.IsatDataPro.ForwardMessage[])">
+            <summary>
+            Submits one or more Mobile-Terminated messages to the MGS to deliver. 
+            </summary>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="messages">A Mobile-Terminated messages list.</param>
+            <returns>SubmitMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.SubmitMessagesAsync(System.Net.Http.HttpClient,System.String,System.String,Gie.IsatDataPro.ForwardMessage[])">
+            <summary>
+            Submits one or more Mobile-Terminated messages to the MGS to deliver. 
+            </summary>
+            <param name="client">HttpClient instance to use.</param>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="messages">A Mobile-Terminated messages list.</param>
+            <returns>SubmitMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetForwardStatusesAsync(System.String,System.String,System.DateTime)">
+            <summary>
+            Retrieves delivery statuses of up to 100 Mobile-Terminated messages.
+            </summary>
+            <remarks>
+            It is possible to query specific known message IDs or based on a datetime start.
+            </remarks>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="startUtc">Provides delivery statuses of all Forward messages since the specified datetime, usually the time of the previous IsClosed false state returned.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetForwardStatusesAsync(System.String,System.String,System.String[])">
+            <summary>
+            Retrieves delivery statuses of up to 100 Mobile-Terminated messages.
+            </summary>
+            <remarks>
+            It is possible to query specific known message IDs or based on a datetime start.
+            </remarks>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="forwardMessageIDs">List of ForwardMessageIDs obtained from a recent submit_messages operation. This will filter on specific network-assigned IDs.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="T:Gie.IsatDataPro.IsatDataProService">
+            <summary>
+            Service for accessing IsatData Pro Gateway Messaging API.
+            </summary>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProService.#ctor(System.String,System.String)">
+            <summary>
+            Creates new instance of service.
+            Base Api URL https://api.inmarsat.com/v1/idp/gateway/rest
+            <param name="accessId">MGS API access Id</param>
+            <param name="accessPassword">MGS API access Id</param>
+            </summary>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProService.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Creates new instance of service.
+            Default Api URL https://api.inmarsat.com/v1/idp/gateway/rest
+            </summary>
+            <param name="accessId">MGS API access Id</param>
+            <param name="accessPassword">MGS API access Id</param>
+            <param name="serviceName">Service name to be shown on Serilog logs</param>
+        </member>
+        <member name="T:Gie.IsatDataPro.SubmitMessageState">
+            <summary>
+            Submit message states for a to-mobile message.
+            </summary>
+            <remarks>
+            When a message is submitted it is considered open and remains so until either an acknowledgement is received from the terminal or an error condition occurs.
+            </remarks>
+        </member>
+        <member name="F:Gie.IsatDataPro.SubmitMessageState.Submitted">
+            <summary>
+            The system has accepted the message (Open).
+            </summary>
+        </member>
+        <member name="F:Gie.IsatDataPro.SubmitMessageState.Received">
+            <summary>
+            The system received an acknowledgement from the terminal (Closed).
+            </summary>
+        </member>
+        <member name="F:Gie.IsatDataPro.SubmitMessageState.Error">
+            <summary>
+            An error code specifies the reason (Closed).
+            </summary>
+        </member>
+        <member name="F:Gie.IsatDataPro.SubmitMessageState.DeliveryFailed">
+            <summary>
+            The system failed to deliver the message to a terminal (Closed).
+            </summary>
+        </member>
+        <member name="F:Gie.IsatDataPro.SubmitMessageState.TimedOut">
+            <summary>
+            Message failed to be delivered within 60 minutes (Closed).
+            </summary>
+            <remarks>
+            A normal state when the message cannot be delivered is DeliveryFailed. 
+            This state is required in case the message is still not delivered 60 minutes after it was sent from the MGS.
+            </remarks>
+        </member>
+        <member name="F:Gie.IsatDataPro.SubmitMessageState.Cancelled">
+            <summary>
+            Message was successfully cancelled by the client application (Closed).
+            </summary>
+        </member>
+        <member name="F:Gie.IsatDataPro.SubmitMessageState.Waiting">
+            <summary>
+            Message is queued (Open).
+            </summary>
+            <remarks>
+            The terminal is in low-power mode and message will be forwarded when terminal wakes up.
+            </remarks>
+        </member>
+        <member name="T:Gie.IsatDataPro.ErrorInfo">
+            <summary>
+            Errors definitions supported by the MGS.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ErrorInfo.ID">
+            <summary>
+            Unique error ID.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ErrorInfo.Name">
+            <summary>
+            Brief description of error.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ErrorInfo.Description">
+            <summary>
+            Long description of error.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.ForwardMessage">
+            <summary>
+            A Mobile-Destinated message including metadata.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessage.DestinationID">
+            <summary>
+            Unique Mobile ID or Broadcast ID to send the message to.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessage.UserMessageID">
+            <summary>
+            Client-assigned message ID to correlate to network-assigned ID.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessage.Payload">
+            <summary>
+            A decoded message payload based on a Message Definition File provisioned on the Mailbox.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessage.RawPayload">
+            <summary>
+            An array of bytes in decimal format. Required if not using Payload.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.SubmitForwardMessage">
+            <summary>
+            The body of the POST operation for submit_messages.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.SubmitForwardMessage.AccessID">
+            <summary>
+            The Mailbox Access ID credential.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.SubmitForwardMessage.Password">
+            <summary>
+            The Mailbox Password credential.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.SubmitForwardMessage.Messages">
+            <summary>
+            The list of messages to be sent.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.ForwardSubmission">
+            <summary>
+            Metadata relating to a submitted Mobile-Terminated message.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardSubmission.ErrorID">
+            <summary>
+            The error code associated with the message acceptance.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardSubmission.DestinationID">
+            <summary>
+            The Mobile ID or the Broadcast ID the message was sent to.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardSubmission.ForwardMessageID">
+            <summary>
+            A unique ID of the Forward message assigned by the system. 
+            The client can use the ForwardMessageID to query the status of the message using GetForwardStatuses or GetForwardMessages.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardSubmission.StateUTC">
+            <summary>
+            UTC based datetime of the submission/acceptance.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardSubmission.UserMessageID">
+            <summary>
+            Present if UserMessageID was passed in the submit_messages call. 
+            This number can be used by the client application to map its own message ID the system-generated ForwardMessageID.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardSubmission.TerminalWakeupPeriod">
+            <summary>
+            The modem's wake-up period in seconds if it is configured for low power mode, (wakeupPeriod is non-zero), or zero (0) if not configured for low power mode.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardSubmission.ScheduledSendUTC">
+            <summary>
+            If the modem is not configured for low power mode, this will be an empty string. 
+            If the modem is configured with a wakeupPeriod nonzero this field contains the scheduled UTC transmission time.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardSubmission.OTAMessageSize">
+            <summary>
+            The size of the message (in bytes) sent over-the-air.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.GetForwardStatusesResult">
+            <summary>
+            Response to get_forward_statuses operation.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetForwardStatusesResult.ErrorID">
+            <summary>
+            The error ID of the operation.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetForwardStatusesResult.More">
+            <summary>
+            True if more statuses remain on the MGS that match the given status filter.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetForwardStatusesResult.NextStartUTC">
+            <summary>
+            Datetime to use for the next GetForwardStatuses operation if More is true.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetForwardStatusesResult.Statuses">
+            <summary>
+            Array of ForwardStatus objects.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.GetReturnMessagesResult">
+            <summary>
+            Holds a response from a get_return_messages call.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetReturnMessagesResult.ErrorID">
+            <summary>
+            An error number for the API operation. (0 = NO_ERROR).
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetReturnMessagesResult.More">
+            <summary>
+            A flag indicating if more messages are available to retrieve in a subsequent get_return_messages call.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetReturnMessagesResult.NextStartUTC">
+            <summary>
+            The next start time high water mark for a subsequent get_return_messages call. 1/1/0001 00:00:00 indicates no more messages are pending.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetReturnMessagesResult.NextStartID">
+            <summary>
+            The unique message ID high water mark for a subsequent get_return_messages call. A value -1 indicates no more messages are pending.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetReturnMessagesResult.Messages">
+            <summary>
+            The list of retrieved messages.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.Payload">
+            <summary>
+            A decoded message payload derived from a Message Definition File provisioned on the Mailbox.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.Payload.Name">
+            <summary>
+            The name of the message, unique within the defined SIN.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.Payload.SIN">
+            <summary>
+            The Service Identification Number, also the first byte of raw payload.
+            </summary>
+            <remarks>
+            Used to define a set of related messages or remote operations. 
+            SIN is intended as a context encapsulating both Return and Forward messages defined in a Message Definition File.
+            </remarks>
+        </member>
+        <member name="P:Gie.IsatDataPro.Payload.MIN">
+            <summary>
+            The Message Identification Number, also the second byte of raw payload.
+            </summary>
+            <remarks>
+            Used to define a message or remote operation within a SIN context. 
+            MIN are intended to represent a specific directional operation and are often paired as Forward request with Return response.
+            </remarks>
+        </member>
+        <member name="P:Gie.IsatDataPro.Payload.IsForward">
+            <summary>
+            Indicates if the message is Forward/Mobile-Terminated.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.Payload.Fields">
+            <summary>
+            An array of decoded message data fields derived from a Message Definition File provisioned on the Mailbox.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.ReturnMessage">
+            <summary>
+            A Mobile-Originated message including metadata.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ReturnMessage.ID">
+            <summary>
+            A unique ID assigned by the network.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ReturnMessage.MessageUTC">
+            <summary>
+            The datetime (UTC) the message was made available in the Mailbox.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ReturnMessage.MobileID">
+            <summary>
+            The unique Mobile ID that sent the message.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ReturnMessage.ReceiveUTC">
+            <summary>
+            The datetime (UTC) the message was received at the Satellite Access Station (aka Land Earth Station).
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ReturnMessage.RegionName">
+            <summary>
+            The system name of the satellite beam the message was received on.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ReturnMessage.SIN">
+            <summary>
+            The Service Identification Number represented by the first payload byte.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ReturnMessage.OTAMessageSize">
+            <summary>
+            The size of the message (in bytes) sent over-the-air.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ReturnMessage.Payload">
+            <summary>
+            A decoded message payload derived from a Message Definition File provisioned on the Mailbox.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ReturnMessage.RawPayload">
+            <summary>
+            An array of payload byte values in decimal format.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.ForwardStatus">
+            <summary>
+            Metadata relating to the Forward message submission.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardStatus.ForwardMessageID">
+            <summary>
+            The system-generated ID for the Mobile-Terminated message submitted.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardStatus.IsClosed">
+            <summary>
+            True if the message was delivered or failed.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardStatus.State">
+            <summary>
+            The latest state of the Forward message.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardStatus.ErrorID">
+            <summary>
+            The error ID associated with the message state.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardStatus.StateUTC">
+            <summary>
+            The datetime (UTC) of the State of the message.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardStatus.ReferenceNumber">
+            <summary>
+            System-assigned reference number.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.SubmitMessagesResult">
+            <summary>
+            Response to submit_cancelations or submit_messages_to_destinations.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.SubmitMessagesResult.ErrorID">
+            <summary>
+            Error ID of the submission batch.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.SubmitMessagesResult.Submissions">
+            <summary>
+            An array of ForwardSubmission objects.
+            </summary>
+        </member>
+    </members>
+</doc>

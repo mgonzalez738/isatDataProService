@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Gie.IsatDataPro.Extensions
 {
+    /// <summary>
+    /// Custom extension methods for HttpResponseMessage class.
+    /// </summary>
     public static class HttpResponseMessageExtensions
     {
         private const string _jsonContentType = "application/json";

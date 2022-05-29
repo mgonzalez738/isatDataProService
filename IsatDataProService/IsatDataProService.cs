@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Globalization;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Serilog;
-using Gie.IsatDataPro.Models;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Gie.IsatDataPro.Extensions;
 using System.IO;
 using System.Reflection;
 using Gie.IsatDataPro.Utils;
@@ -81,12 +76,6 @@ namespace Gie.IsatDataPro
 
         #region Private Methods
 
-        /// <summary>
-        /// Initialize service
-        /// </summary>
-        /// <param name="accessId">MGS API access Id</param>
-        /// <param name="accessPassword">MGS API access Id</param>
-        /// <param name="httpClient">HttpClient to be use by service</param>
         private void Init(string accessId, string accessPassword)
         {
             // Set credentials

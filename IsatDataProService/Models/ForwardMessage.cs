@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gie.IsatDataPro.Models
+namespace Gie.IsatDataPro
 {
     /// <summary>
     /// A Mobile-Destinated message including metadata.

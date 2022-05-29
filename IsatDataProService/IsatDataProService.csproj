@@ -4,6 +4,16 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>Gie.IsatDataProService</AssemblyName>
     <RootNamespace>Gie.IsatDataPro</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Authors>Martin Gonzalez</Authors>
+    <Company>GIE GROUP</Company>
+    <Product>IsatDataProService</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\repositorios-gie\isatDataProService\IsatDataProService\Gie.IsatDataProService.xml</DocumentationFile>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>
