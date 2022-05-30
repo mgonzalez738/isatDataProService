@@ -315,6 +315,39 @@ namespace Gie.IsatDataPro
             catch { throw; }
         }
 
+        /// <summary>
+        /// Retrieves up to 100 Forward message records based on the specified list.
+        /// </summary>
+        /// <remarks>
+        /// It is possible to query specific known message IDs or based on a datetime start.
+        /// </remarks>
+        /// <param name="accessId">MGS Mailbox access Id.</param>
+        /// <param name="accessPassword">MGS Mailbox access password.</param>
+        /// <param name="forwardMessageIDs">List of ForwardMessageIDs obtained from a recent submit_messages operation. This will filter on specific network-assigned IDs.</param>
+        /// <returns>GetForwardMessagesResult object that holds API response.</returns>
+        public static async Task<GetForwardMessagesResult> GetForwardMessagesAsync(string accessId, string accessPassword, string[] forwardMessageIDs)
+        {
+            try { return await GetForwardMessagesImplAsync(_client, accessId, accessPassword, forwardMessageIDs); }
+            catch { throw; }
+        }
+
+        /// <summary>
+        /// Retrieves up to 100 Forward message records based on the specified list.
+        /// </summary>
+        /// <remarks>
+        /// It is possible to query specific known message IDs or based on a datetime start.
+        /// </remarks>
+        /// <param name="client">HttpClient instance to use.</param>
+        /// <param name="accessId">MGS Mailbox access Id.</param>
+        /// <param name="accessPassword">MGS Mailbox access password.</param>
+        /// <param name="forwardMessageIDs">List of ForwardMessageIDs obtained from a recent submit_messages operation. This will filter on specific network-assigned IDs.</param>
+        /// <returns>GetForwardMessagesResult object that holds API response.</returns>
+        public static async Task<GetForwardMessagesResult> GetForwardMessagesAsync(HttpClient client, string accessId, string accessPassword, string[] forwardMessageIDs)
+        {
+            try { return await GetForwardMessagesImplAsync(client, accessId, accessPassword, forwardMessageIDs); }
+            catch { throw; }
+        }
+
         #endregion
 
         #region Private Methods
@@ -585,6 +618,35 @@ namespace Gie.IsatDataPro
                     NullValueHandling = NullValueHandling.Ignore,
                 };
                 var result = JsonConvert.DeserializeObject<GetForwardStatusesResult>(content, settings);
+
+                // Returns result
+                return result;
+            }
+            catch { throw; }
+        }
+
+        private static async Task<GetForwardMessagesResult> GetForwardMessagesImplAsync(HttpClient client, string accessId, string accessPassword, string[] forwardMessageIDs)
+        {
+            var strForwardMessageIDs = String.Join(",", forwardMessageIDs);
+
+            string endpoint = $"get_forward_messages.json/?access_id={accessId}&password={accessPassword}&fwIDs={strForwardMessageIDs}";
+
+            try
+            {
+                // Sends Api request
+                HttpResponseMessage response = await client.GetAsync(endpoint);
+
+                // Checks OK response
+                response.EnsureSuccessStatusCode();
+                // Checks that response is json type
+                response.EnsureJsonContentType();
+                // Gets Response contents as string
+                string content = await response.Content.ReadAsStringAsync();
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                };
+                var result = JsonConvert.DeserializeObject<GetForwardMessagesResult>(content, settings);
 
                 // Returns result
                 return result;

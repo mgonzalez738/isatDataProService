@@ -70,6 +70,7 @@ namespace Gie.IsatDataPro
             _pollTimer = new ScheduleTimer();
             _pollTimer.Elapsed += PollTimerElapsed;
             _pollTimer.Start(periodSeconds);
+            _pollTimer.Stop();
         }
 
         #endregion
@@ -121,7 +122,7 @@ namespace Gie.IsatDataPro
 
         private void PollTimerElapsed(object sender, EventArgs e)
         {
-            
+            Console.WriteLine(DateTime.Now.ToString());
         }
 
         #endregion

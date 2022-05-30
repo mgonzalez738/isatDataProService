@@ -202,6 +202,32 @@
             <param name="forwardMessageIDs">List of ForwardMessageIDs obtained from a recent submit_messages operation. This will filter on specific network-assigned IDs.</param>
             <returns>GetReturnMessagesResult object that holds API response.</returns>
         </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetForwardStatusesAsync(System.Net.Http.HttpClient,System.String,System.String,System.DateTime)">
+            <summary>
+            Retrieves delivery statuses of up to 100 Mobile-Terminated messages.
+            </summary>
+            <remarks>
+            It is possible to query specific known message IDs or based on a datetime start.
+            </remarks>
+            <param name="client">HttpClient instance to use.</param>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="startUtc">Provides delivery statuses of all Forward messages since the specified datetime, usually the time of the previous IsClosed false state returned.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
+        <member name="M:Gie.IsatDataPro.IsatDataProMgsApi.GetForwardStatusesAsync(System.Net.Http.HttpClient,System.String,System.String,System.String[])">
+            <summary>
+            Retrieves delivery statuses of up to 100 Mobile-Terminated messages.
+            </summary>
+            <remarks>
+            It is possible to query specific known message IDs or based on a datetime start.
+            </remarks>
+            <param name="client">HttpClient instance to use.</param>
+            <param name="accessId">MGS Mailbox access Id.</param>
+            <param name="accessPassword">MGS Mailbox access password.</param>
+            <param name="forwardMessageIDs">List of ForwardMessageIDs obtained from a recent submit_messages operation. This will filter on specific network-assigned IDs.</param>
+            <returns>GetReturnMessagesResult object that holds API response.</returns>
+        </member>
         <member name="T:Gie.IsatDataPro.IsatDataProService">
             <summary>
             Service for accessing IsatData Pro Gateway Messaging API.
@@ -319,6 +345,61 @@
             An array of bytes in decimal format. Required if not using Payload.
             </summary>
         </member>
+        <member name="T:Gie.IsatDataPro.ForwardMessageRecord">
+            <summary>
+            Forward message data and metadata.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.ID">
+            <summary>
+            System-assigned ForwardMessageID.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.StatusUTC">
+            <summary>
+            UTC based datetime of the message status.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.CreateUTC">
+            <summary>
+            Time the message was accepted by the MGS.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.IsClosed">
+            <summary>
+            True if the message was delivered or failed.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.State">
+            <summary>
+            The latest state of the message.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.DestinationID">
+            <summary>
+            The mobile ID or broadcast ID the message was sent to.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.ErrorID">
+            <summary>
+            The error ID associated with the message state.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.Payload">
+            <summary>
+            A decoded message payload derived from a Message Definition File provisioned on the Mailbox.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.RawPayload">
+            <summary>
+            An array of payload byte values in decimal format.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.ForwardMessageRecord.ReferenceNumber">
+            <summary>
+            System-assigned reference number.
+            </summary>
+        </member>
         <member name="T:Gie.IsatDataPro.SubmitForwardMessage">
             <summary>
             The body of the POST operation for submit_messages.
@@ -385,6 +466,21 @@
         <member name="P:Gie.IsatDataPro.ForwardSubmission.OTAMessageSize">
             <summary>
             The size of the message (in bytes) sent over-the-air.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.GetForwardMessagesResult">
+            <summary>
+            Response to GetForwardMessages operation.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetForwardMessagesResult.ErrorID">
+            <summary>
+            The error ID of the operation.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.GetForwardMessagesResult.Messages">
+            <summary>
+            List of retrieved Forward messages.
             </summary>
         </member>
         <member name="T:Gie.IsatDataPro.GetForwardStatusesResult">
@@ -578,6 +674,42 @@
         <member name="P:Gie.IsatDataPro.SubmitMessagesResult.Submissions">
             <summary>
             An array of ForwardSubmission objects.
+            </summary>
+        </member>
+        <member name="T:Gie.IsatDataPro.Utils.ScheduleTimer">
+            <summary>
+            Timer for scheduling polls. 
+            </summary>
+        </member>
+        <member name="E:Gie.IsatDataPro.Utils.ScheduleTimer.Elapsed">
+            <summary>
+            Event fired when poll period elapsed.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.Utils.ScheduleTimer.Period">
+            <summary>
+            Excecution period in seconds.
+            </summary>
+        </member>
+        <member name="P:Gie.IsatDataPro.Utils.ScheduleTimer.NextExcecution">
+            <summary>
+            Next excecution date and time
+            </summary>
+        </member>
+        <member name="M:Gie.IsatDataPro.Utils.ScheduleTimer.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Gie.IsatDataPro.Utils.ScheduleTimer.Start(System.Int32)">
+            <summary>
+            Starts timer.
+            </summary>
+            <param name="periodInSeconds">Excecution period in seconds.</param>
+        </member>
+        <member name="M:Gie.IsatDataPro.Utils.ScheduleTimer.Stop">
+            <summary>
+            Stops execution.
             </summary>
         </member>
     </members>

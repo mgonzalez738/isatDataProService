@@ -4,61 +4,71 @@
     using System.Threading;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Timer for scheduling polls. 
+    /// </summary>
     public class ScheduleTimer
     {
+        #region Events
+        /// <summary>
+        /// Event fired when poll period elapsed.
+        /// </summary>
         public event EventHandler Elapsed;
 
+        #endregion
+
+        #region Members
+
         private int period;                 // milisegundos
-        private int offset;                 // milisegundos
         private DateTime nextExecution; 
-        private CancellationTokenSource tokenSource; 
+        private CancellationTokenSource tokenSource;
 
-        public ScheduleTimer()
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Excecution period in seconds.
+        /// </summary>
+        public int Period
         {
-            this.offset = 0;
-        }
-        public ScheduleTimer(int offset)
-        {
-            this.offset = offset;
-        }
-
-        private async Task timerFuction(int periodInSeconds, CancellationToken token)
-        {
-            this.period = periodInSeconds * 1000;
-
-            while(true) {
-
-                // Calcula la demora hasta la proxima ejecucion
-                DateTime timeNow = DateTime.Now;
-                TimeSpan spanPeriod = TimeSpan.FromMilliseconds(this.period);
-                TimeSpan spanOffset = TimeSpan.FromMilliseconds(this.offset);
-                long divFirstExec = (long)Math.Floor((decimal)(timeNow.Ticks / spanPeriod.Ticks)) + 1;
-                this.nextExecution = new DateTime(divFirstExec * spanPeriod.Ticks + spanOffset.Ticks);
-
-                // Espera se cumpla el periodo o se cancele el timer
-                try {
-                    await Task.Delay(nextExecution.Subtract(timeNow), token);
-                } catch (TaskCanceledException) {
-                    break;
-                } catch (Exception e){
-                    Console.WriteLine("Error in ScheduleTimer Task (" + e.Message + ")");
-                    break;
-                }
-
-                // Lanza el evento
-                OnElapsed(new EventArgs()); 
-
-                // Demora para evitar relanzamientos
-                await Task.Delay(100);
-            }      
+            get { return this.period / 1000; }
         }
 
+        /// <summary>
+        /// Next excecution date and time
+        /// </summary>
+        public DateTime NextExcecution
+        {
+            get { return this.nextExecution; }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public ScheduleTimer() { }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Starts timer.
+        /// </summary>
+        /// <param name="periodInSeconds">Excecution period in seconds.</param>
         public void Start(int periodInSeconds)
         {
             this.tokenSource = new CancellationTokenSource();
-            _ = timerFuction(periodInSeconds, tokenSource.Token);
+            _ = TimerFuctionAsync(periodInSeconds, tokenSource.Token);
         }
 
+        /// <summary>
+        /// Stops execution.
+        /// </summary>
         public void Stop()
         {
             if(this.tokenSource != null) {
@@ -66,20 +76,51 @@
             }
         }
 
-        protected virtual void OnElapsed(EventArgs e)
+        #endregion
+
+        #region Private Methods
+
+        private async Task TimerFuctionAsync(int periodInSeconds, CancellationToken token)
+        {
+            this.period = periodInSeconds * 1000;
+
+            while (true)
+            {
+
+                // Calcula la demora hasta la proxima ejecucion
+                DateTime timeNow = DateTime.Now;
+                TimeSpan spanPeriod = TimeSpan.FromMilliseconds(this.period);
+                long divFirstExec = (long)Math.Floor((decimal)(timeNow.Ticks / spanPeriod.Ticks)) + 1;
+                this.nextExecution = new DateTime(divFirstExec * spanPeriod.Ticks);
+
+                // Espera se cumpla el periodo o se cancele el timer
+                try
+                {
+                    await Task.Delay(nextExecution.Subtract(timeNow), token);
+                }
+                catch (TaskCanceledException)
+                {
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error in ScheduleTimer Task (" + e.Message + ")");
+                    break;
+                }
+
+                // Lanza el evento
+                OnElapsed(new EventArgs());
+
+                // Demora para evitar relanzamientos
+                await Task.Delay(100, token);
+            }
+        }
+
+        private void OnElapsed(EventArgs e)
         {
             Elapsed?.Invoke(this, e);
         }
 
-        public int Period
-        {
-            get { return this.period / 1000; }
-        }
-
-        public DateTime NextExcecution
-        {
-            get { return this.nextExecution; }
-        }
+        #endregion
     }
 }
-
